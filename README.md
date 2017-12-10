@@ -19,7 +19,7 @@ $ ./setup.sh
 ## Local Settings
 `~/.gitconfig.local`
 
-Use ~/.gitconfig.local to store sensitive information such as the git user credentials, e.g.:
+Use `~/.gitconfig.local` to store sensitive information such as the git user credentials, e.g.:
 ```
 [user]
   name = Jason Hee
