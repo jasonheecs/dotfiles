@@ -46,6 +46,10 @@ declare -a FILES_TO_SYMLINK=(
     'git/gitaliases'
     'git/gitconfig'
     'git/gitignore'
+
+    # Optional private local files
+    'private/git/gitconfig.extra'
+    'private/shell/zshrc.extra'
 )
 
 for i in "${FILES_TO_SYMLINK[@]}"; do

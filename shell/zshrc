@@ -96,3 +96,6 @@ export PATH="/usr/local/sbin:$PATH"
 
 # Autocompletion for sshrc
 compdef sshrc=ssh
+
+# Add extra local zshrc config
+. ~/.zshrc.extra

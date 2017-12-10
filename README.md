@@ -16,14 +16,22 @@ $ chmod +x setup.sh
 $ ./setup.sh
 ```
 
-## Local Settings
-`~/.gitconfig.extra`
+## Local / Private Settings
+#### `~/.gitconfig.extra`
 
 Use a `~/.gitconfig.extra` file to add extra git configuration and to store sensitive information such as the git user credentials locally, e.g.:
-```
+```sh
 [user]
   name = Jason Hee
   email = jason@example.com
+```
+
+#### `~/.zshrc.extra`
+
+Use a `~/.zshrc.extra` file to add extra zshrc aliases / settings, eg:
+```sh
+# Common Directories
+alias projects="cd /Users/jasonheecs/Projects"
 ```
 
 ## Acknowledgments

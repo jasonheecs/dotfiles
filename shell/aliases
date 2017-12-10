@@ -28,8 +28,5 @@ alias gs="git status"
 alias gst="git stash"
 alias gsp="git stash pop"
 
-# Common Directories
-alias projects="cd /Users/heechenshan/Projects"
-
 # Common Tasks
 alias aliases="cat ~/.aliases"
