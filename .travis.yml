@@ -13,5 +13,8 @@ addons:
 script:
  - bash -c 'shopt -s globstar; shellcheck **/*.sh'
 
+git:
+  submodules: false
+
 matrix:
   fast_finish: true
