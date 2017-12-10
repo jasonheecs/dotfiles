@@ -22,7 +22,7 @@
     changed = green
     untracked = cyan
 [help]
-	autocorrect = 15
+    autocorrect = 15
 [credential]
     helper = osxkeychain
 [fetch]
