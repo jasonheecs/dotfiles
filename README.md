@@ -17,9 +17,9 @@ $ ./setup.sh
 ```
 
 ## Local Settings
-`~/.gitconfig.local`
+`~/.gitconfig.extra`
 
-Use `~/.gitconfig.local` to store sensitive information such as the git user credentials, e.g.:
+Use a `~/.gitconfig.extra` file to add extra git configuration and to store sensitive information such as the git user credentials locally, e.g.:
 ```
 [user]
   name = Jason Hee
