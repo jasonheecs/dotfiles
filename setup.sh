@@ -47,6 +47,8 @@ declare -a FILES_TO_SYMLINK=(
     'git/gitconfig'
     'git/gitignore'
 
+    'vim/vimrc'
+
     # Optional private local files
     'private/git/gitconfig.extra'
     'private/shell/zshrc.extra'
