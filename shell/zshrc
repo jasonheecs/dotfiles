@@ -51,7 +51,7 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git npm osx extract z sublime vagrant web-search)
+plugins=(git osx extract z sublime vagrant web-search)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -91,7 +91,11 @@ LC_ALL=en_US.UTF-8
 
 #nvm
 export NVM_DIR="$HOME/.nvm"
-. "/usr/local/opt/nvm/nvm.sh"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" --no-use
+
+alias node='unalias node ; unalias npm ; nvm use default ; node $@'
+alias npm='unalias node ; unalias npm ; nvm use default ; npm $@'
+
 export PATH="/usr/local/sbin:$PATH"
 
 # Autocompletion for sshrc
