@@ -1,4 +1,4 @@
 [submodule "private"]
-	path = private
-	url = git@github.com:jasonheecs/dotfiles-private.git
+    path = private
+    url = git@github.com:jasonheecs/dotfiles-private.git
     ignore = all

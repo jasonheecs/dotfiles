@@ -1,10 +1,3 @@
-# Easier Navigation
-alias ..="cd .."
-alias ...="cd ../.."
-alias ....="cd ../../.."
-alias .....="cd ../../../.."
-alias -- -="cd -"
-
 # Vagrant
 alias vd="vagrant destroy"
 alias vh="vagrant halt"
@@ -12,21 +5,10 @@ alias vm="vagrant ssh"
 alias vup="vagrant up"
 
 # Git
-alias ga="git add"
-alias gb="git branch"
-alias gc="git checkout"
-alias gcl="git clone"
-alias gcln="git clean -fd"
-alias gd="git diff"
-alias gl="git log"
-alias gm="git commit"
-alias gp="git push"
-alias gr="git reset"
-alias gra="git remote add"
-alias grr="git remote rm"
+alias ggf="git push --force origin $(current_branch)"
 alias gs="git status"
-alias gst="git stash"
-alias gsp="git stash pop"
+alias gst!="git stash"
 
 # Common Tasks
 alias aliases="cat ~/.aliases"
+alias ggl="google"
