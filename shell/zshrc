@@ -97,8 +97,18 @@ export PATH="/usr/local/sbin:$PATH"
 # Autocompletion for sshrc
 compdef sshrc=ssh
 
-# zsh-autosuggestions package
+# extra packages
 source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/local/opt/nvm/nvm.sh
+eval "$(thefuck --alias)"
 
-# Add extra local zshrc config
-. ~/.zshrc.extra
+# Add extra local zshrc config if it exists
+
+function source_if_exists()
+{
+    if [[ -r $1 ]]; then
+        source $1
+    fi
+}
+
+source_if_exists ~/.zshrc.extra
