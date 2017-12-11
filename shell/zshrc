@@ -51,7 +51,7 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git npm osx extract z zsh-autosuggestions sublime vagrant)
+plugins=(git npm osx extract z sublime vagrant web-search)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -96,6 +96,9 @@ export PATH="/usr/local/sbin:$PATH"
 
 # Autocompletion for sshrc
 compdef sshrc=ssh
+
+# zsh-autosuggestions package
+source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # Add extra local zshrc config
 . ~/.zshrc.extra
