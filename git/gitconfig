@@ -23,6 +23,10 @@
     untracked = cyan
 [help]
     autocorrect = 15
+[branch "master"]
+    # Use `origin` as the default remote on the `master` branch in all cases
+    remote = origin
+    merge = refs/heads/master
 [credential]
     helper = osxkeychain
 [fetch]
