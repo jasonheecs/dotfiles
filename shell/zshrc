@@ -92,6 +92,7 @@ LC_ALL=en_US.UTF-8
 #nvm
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" --no-use
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
 alias node='unalias node ; unalias npm ; nvm use default ; node $@'
 alias npm='unalias node ; unalias npm ; nvm use default ; npm $@'
@@ -103,7 +104,6 @@ compdef sshrc=ssh
 
 # extra packages
 source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /usr/local/opt/nvm/nvm.sh
 eval "$(thefuck --alias)"
 
 # Add extra local zshrc config if it exists
