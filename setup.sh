@@ -16,6 +16,8 @@ DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "${DOTFILES_DIR}/lib/print_functions.sh"
 # shellcheck source=./lib/print_functions.sh
 source "${DOTFILES_DIR}/lib/user_input.sh"
+# shellcheck source=./lib/install_software.sh
+source "${DOTFILES_DIR}/lib/install_software.sh"
 
 # Create dotfiles_old in homedir
 echo -n "Creating $dir_backup for backup of any existing dotfiles in ~..."
@@ -86,6 +88,8 @@ main() {
     done
 
     unset FILES_TO_SYMLINK
+
+    install_software
 }
 
 main
