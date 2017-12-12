@@ -6,7 +6,7 @@ alias vup="vagrant up"
 
 # Git
 alias gco!="git checkout --"
-alias ggf="git push --force origin $(current_branch)"
+alias ggf="git push --force origin $(git_current_branch)"
 alias gs="git status"
 alias gst!="git stash"
 alias gupd="git pull --rebase origin develop"
