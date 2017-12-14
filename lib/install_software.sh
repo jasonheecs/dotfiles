@@ -5,8 +5,10 @@ install_nvm() {
 }
 
 install_software() {
+    echo 'in'
     # shellcheck disable=SC2154
-    if [[ "$(command -v nvm)" -ne "nvm" ]]; then
+    if ! [[ -x "$(command -v nvm)" ]]; then
+        # install_nvm
         install_nvm
     fi
 }
