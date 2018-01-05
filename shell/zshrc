@@ -98,6 +98,7 @@ alias node='unalias node ; unalias npm ; nvm use default ; node $@'
 alias npm='unalias node ; unalias npm ; nvm use default ; npm $@'
 
 export PATH="/usr/local/sbin:$PATH"
+export PATH="$HOME/.composer/vendor/bin:$PATH"
 
 # Autocompletion for sshrc
 compdef sshrc=ssh
