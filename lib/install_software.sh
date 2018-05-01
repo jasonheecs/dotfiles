@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# shellcheck source=./homebrew.sh
-source "./homebrew.sh"
-# shellcheck source=./ruby.sh
-source "./ruby.sh"
+# shellcheck source=./lib/homebrew.sh
+source "${DOTFILES_DIR}/lib/homebrew.sh"
+# shellcheck source=./lib/ruby.sh
+source "${DOTFILES_DIR}/lib/ruby.sh"
 
 install_nvm() {
     echo "Installing nvm..."
