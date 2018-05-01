@@ -2,7 +2,7 @@
 
 install_homebrew() {
     # Check for Homebrew, install if we don't have it
-    if test ! $(which brew); then
+    if test ! "$(which brew)"; then
         echo "Installing homebrew..."
         ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     fi
@@ -49,7 +49,7 @@ install_homebrew() {
     )
 
     echo "Installing homebrew packages..."
-    brew install ${PACKAGES[@]}
+    brew install "${PACKAGES[@]}"
 
     echo "Cleaning up for homebrew..."
     brew cleanup

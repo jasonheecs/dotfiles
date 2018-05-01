@@ -2,6 +2,8 @@
 
 # shellcheck source=./homebrew.sh
 source "./homebrew.sh"
+# shellcheck source=./ruby.sh
+source "./ruby.sh"
 
 install_nvm() {
     echo "Installing nvm..."
@@ -16,5 +18,10 @@ install_software() {
     if ! [[ -x "$(command -v nvm)" ]]; then
         # install_nvm
         install_nvm
+    fi
+
+    if ! [[ -x "$(command -v rbenv)" ]]; then
+        # install_nvm
+        install_ruby
     fi
 }
