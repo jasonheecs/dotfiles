@@ -3,7 +3,7 @@
 ask_for_confirmation() {
     print_question "$1 (y/n) "
     read -nr 1
-    printf "\n"
+    printf "\\n"
 }
 
 answer_is_yes() {

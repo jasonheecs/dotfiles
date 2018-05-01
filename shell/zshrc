@@ -106,6 +106,7 @@ compdef sshrc=ssh
 # extra packages
 source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 eval "$(thefuck --alias)"
+eval "$(rbenv init -)"
 
 # Add extra local zshrc config if it exists
 
