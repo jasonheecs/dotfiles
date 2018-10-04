@@ -37,6 +37,7 @@ install_homebrew() {
         python
         python3
         rbenv
+        ruby-build
         shellcheck
         sqlite
         thefuck
