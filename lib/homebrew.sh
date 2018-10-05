@@ -42,6 +42,7 @@ install_homebrew() {
         sqlite
         thefuck
         tmux
+        travis
         tree
         vim
         webpack
