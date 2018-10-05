@@ -11,13 +11,11 @@ install_homebrew() {
     brew update
 
     # Install GNU core utilities (those that come with OS X are outdated)
-    brew tap homebrew/dupes
     brew install coreutils
     brew install gnu-sed --with-default-names
     brew install gnu-tar --with-default-names
     brew install gnu-indent --with-default-names
     brew install gnu-which --with-default-names
-    brew install gnu-grep --with-default-names
 
     # Install GNU `find`, `locate`, `updatedb`, and `xargs`, g-prefixed
     brew install findutils
@@ -29,6 +27,8 @@ install_homebrew() {
         ffmpeg
         gettext
         git-crypt
+        hadolint
+        heroku/brew/heroku
         httpie
         imagemagick
         mariadb
@@ -45,7 +45,6 @@ install_homebrew() {
         tree
         vim
         wget
-        yarn
         zsh-autosuggestions
     )
 
