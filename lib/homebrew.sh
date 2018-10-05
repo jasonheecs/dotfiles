@@ -44,6 +44,7 @@ install_homebrew() {
         tmux
         tree
         vim
+        webpack
         wget
         zsh-autosuggestions
     )
