@@ -55,6 +55,17 @@
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    # Fetch origin and checkout
+
+    get = "!f() { \
+      git fetch origin "$1"; \
+      git checkout "$1"; \
+    }; f"
+
+    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 
 [pretty]
     custom = "%C(magenta)%h%C(red)%d %C(yellow)%ar %C(green)%s %C(yellow)(%an)"
