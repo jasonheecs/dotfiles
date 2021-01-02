@@ -46,7 +46,7 @@ install_homebrew() {
 
     echo "Installing homebrew packages..."
     brew install "${PACKAGES[@]}"
-    brew install --cask ngrok
+    brew install --cask ngrok meetingbar
 
     echo "Cleaning up for homebrew..."
     brew cleanup
