@@ -4,18 +4,14 @@ install_homebrew() {
     # Check for Homebrew, install if we don't have it
     if test ! "$(which brew)"; then
         echo "Installing homebrew..."
-        ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
     fi
 
-    # Update homebrew recipes
+    # # Update homebrew recipes
     brew update
 
     # Install GNU core utilities (those that come with OS X are outdated)
     brew install coreutils
-    brew install gnu-sed --with-default-names
-    brew install gnu-tar --with-default-names
-    brew install gnu-indent --with-default-names
-    brew install gnu-which --with-default-names
 
     # Install GNU `find`, `locate`, `updatedb`, and `xargs`, g-prefixed
     brew install findutils
@@ -26,7 +22,6 @@ install_homebrew() {
         awscli
         ffmpeg
         gettext
-        git-crypt
         hadolint
         heroku/brew/heroku
         httpie
@@ -34,8 +29,7 @@ install_homebrew() {
         mariadb
         postgresql
         php
-        python
-        python3
+        pyenv
         rbenv
         ruby-build
         shellcheck
@@ -52,6 +46,7 @@ install_homebrew() {
 
     echo "Installing homebrew packages..."
     brew install "${PACKAGES[@]}"
+    brew install --cask ngrok
 
     echo "Cleaning up for homebrew..."
     brew cleanup
