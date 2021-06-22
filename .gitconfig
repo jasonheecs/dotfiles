@@ -23,6 +23,8 @@
     untracked = cyan
 [help]
     autocorrect = 15
+[init]
+    defaultBranch = master
 [branch "master"]
     # Use `origin` as the default remote on the `master` branch in all cases
     remote = origin
@@ -32,5 +34,4 @@
 [fetch]
     prune = true
 [include]
-    path = ~/.gitconfig.extra
     path = ~/.gitaliases
