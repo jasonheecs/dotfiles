@@ -31,7 +31,11 @@ export PATH="$HOME/.composer/vendor/bin:$PATH"
 
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
+eval "$(pyenv init -)"
+eval "$(rbenv init -)"
+
 # Tell Homebrew to not autoupdate every single time I run it (just once a week).
 export HOMEBREW_AUTO_UPDATE_SECS=604800
 
 source_if_exists ~/.zshrc.extra
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
