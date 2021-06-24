@@ -35,3 +35,4 @@
     prune = true
 [include]
     path = ~/.gitaliases
+    path = ~/.gitcredentials
