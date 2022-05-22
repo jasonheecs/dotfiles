@@ -29,10 +29,14 @@ source_if_exists ~/.aliases
 export PATH="/usr/local/sbin:$PATH"
 export PATH="$HOME/.composer/vendor/bin:$PATH"
 
-source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+# Autocompletion for sshrc
+compdef sshrc=ssh
 
-eval "$(pyenv init -)"
+source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 eval "$(rbenv init -)"
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init --path)"
+fi
 
 # Tell Homebrew to not autoupdate every single time I run it (just once a week).
 export HOMEBREW_AUTO_UPDATE_SECS=604800
