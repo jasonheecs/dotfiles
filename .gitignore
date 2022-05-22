@@ -21,4 +21,8 @@ npm-debug.log
 
 # IDEs stuff
 .idea
+.DS_Store
 .run
+
+# Privacy
+.gitcredentials
