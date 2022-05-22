@@ -34,6 +34,7 @@ compdef sshrc=ssh
 
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 eval "$(rbenv init -)"
+eval "$(fnm env --use-on-cd)"
 
 # Tell Homebrew to not autoupdate every single time I run it (just once a week).
 export HOMEBREW_AUTO_UPDATE_SECS=604800
