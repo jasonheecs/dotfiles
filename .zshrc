@@ -13,7 +13,7 @@ ZSH_THEME="agnoster"
 
 COMPLETION_WAITING_DOTS="true"
 
-plugins=(git osx extract z sublime docker rails web-search vagrant)
+plugins=(git macos extract z sublime docker rails web-search vagrant)
 
 ZSH_DISABLE_COMPFIX=true
 source_if_exists $ZSH/oh-my-zsh.sh
