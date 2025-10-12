@@ -24,6 +24,9 @@ npm-debug.log
 .DS_Store
 .run
 
+# Ansible tmp files
+.ansible
+
 # Privacy
 .gitcredentials
 .zshrc.extra
