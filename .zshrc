@@ -1,15 +1,13 @@
 # Add extra local config if it exists
-function source_if_exists()
+source_if_exists()
 {
-    if [[ -r $1 ]]; then
-        source $1
-    fi
+    [[ -f "$1" ]] && source "$1"
 }
 
 # Tell Homebrew to not autoupdate every single time I run it (just once a week).
 export HOMEBREW_AUTO_UPDATE_SECS=604800
 
-## Init Zim framework for zsh
+# Init Zim framework for zsh
 HOME_DIR=${ZDOTDIR:-${HOME}}
 ZIM_HOME=${HOME_DIR}/.zim
 
@@ -20,13 +18,10 @@ fi
 # Initialize modules.
 source ${ZIM_HOME}/init.zsh
 
-
 eval "$(rbenv init -)"
 eval "$(fnm env --use-on-cd)"
 eval "$(pyenv init -)"
 
-
 source_if_exists ~/.aliases
 source_if_exists ~/.zshrc.extra
-
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+source_if_exists ~/.iterm2_shell_integration.zsh
