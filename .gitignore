@@ -23,6 +23,7 @@ npm-debug.log
 .idea
 .DS_Store
 .run
+.vscode
 
 # Ansible tmp files
 .ansible
