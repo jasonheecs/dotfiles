@@ -18,9 +18,17 @@ fi
 # Initialize modules.
 source ${ZIM_HOME}/init.zsh
 
-eval "$(rbenv init -)"
-eval "$(fnm env --use-on-cd)"
-eval "$(pyenv init -)"
+(( $+commands[rbenv] )) && eval "$(rbenv init -)"
+(( $+commands[fnm] )) && eval "$(fnm env --use-on-cd)"
+(( $+commands[pyenv] )) && eval "$(pyenv init -)"
+
+# pnpm
+export PNPM_HOME="${HOME}/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
 
 source_if_exists ~/.aliases
 source_if_exists ~/.zshrc.extra
