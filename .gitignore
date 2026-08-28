@@ -31,3 +31,4 @@ npm-debug.log
 # Privacy
 .gitcredentials
 .zshrc.extra
+**/.claude/settings.local.json
