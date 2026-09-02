@@ -2,20 +2,25 @@
 
 ## Comments and documentation
 
-Keep module docstrings and comment blocks short: state what the module is
-and the one non-obvious constraint, then stop (usually 3-6 lines).
-A comment that explains genuinely non-obvious behavior belongs
-next to the specific line it explains, not in a file-level header.
+Keep docstrings and comment blocks short (3-6 lines).
+Comments explaining non-obvious behavior go next to the line they explain, not in a file-level header.
+Comments terser than feels natural.
 
 ## Code structure
 
-Prefer code that reads without comments. When a function does more than
-~5 distinct things in sequence, extract each into a named helper so the
-caller reads as an outline. When a function or constructor signature takes
-4 or more related parameters, group them into a dataclass or dict instead
-of a flat parameter list.
+Prefer code that reads without comments. Extract named helpers once a function
+does more than ~5 things in sequence. Group 4+ related parameters into a
+dataclass or dict.
+
+## Python code style
+
+Return types on every signature. No roadmap phase numbers in code.
+
+## Dependencies
+
+Prefer a well-tested library over hand-rolling. Adding a dependency beats
+writing your own parser; less code to own is the goal.
 
 ## Git commits and pull requests
 
-Don't add a "Co-Authored-By: Claude" trailer to commit messages.
-Don't add a "Generated with Claude Code" footer to pull request descriptions.
+No "Co-Authored-By: Claude" trailer, no "Generated with Claude Code" footer.
