@@ -2,25 +2,26 @@
 
 ## Comments and documentation
 
-Keep docstrings and comment blocks short (3-6 lines).
-Comments explaining non-obvious behavior go next to the line they explain, not in a file-level header.
-Comments terser than feels natural.
+- Keep docstrings and comment blocks short (3-6 lines).
+- Comments explaining non-obvious behavior go next to the line they explain, not in a file-level header.
+- Comments terser than feels natural.
+- Never mention "Phase N" or docs/roadmap.md in code/commits/PRs
 
 ## Code structure
 
-Prefer code that reads without comments. Extract named helpers once a function
-does more than ~5 things in sequence. Group 4+ related parameters into a
-dataclass or dict.
+- Prefer code that reads without comments
+- Extract named helpers once a function does more than ~5 things in sequence.
+- Group 4+ related parameters into a dataclass or dict.
 
 ## Python code style
 
-Return types on every signature. No roadmap phase numbers in code.
+- Return types on every signature
 
 ## Dependencies
 
-Prefer a well-tested library over hand-rolling. Adding a dependency beats
-writing your own parser; less code to own is the goal.
+- Prefer a well-tested library over hand-rolling.
+- Adding a dependency beats writing your own parser; less code to own is the goal.
 
 ## Git commits and pull requests
 
-No "Co-Authored-By: Claude" trailer, no "Generated with Claude Code" footer.
+- No "Co-Authored-By: Claude" trailer, no "Generated with Claude Code" footer.
