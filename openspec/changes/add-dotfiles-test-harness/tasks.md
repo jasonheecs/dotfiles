@@ -46,7 +46,7 @@ No isolation needed; these should run in well under a second.
 
 ## 4. Continuous integration
 
-- [ ] 4.1 Add `.github/workflows/ci.yml` running on push and pull_request against
+- [x] 4.1 Add `.github/workflows/ci.yml` running on push and pull_request against
       `macos-latest`: checkout, `actions/cache` on `tests/.cache` keyed by
       `hashFiles('.zimrc')`, `brew bundle --file=tests/Brewfile`, then `bats tests/`.
       Verify by pushing a branch and confirming the job goes green
