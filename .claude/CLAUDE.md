@@ -33,3 +33,9 @@
 ## Git commits and pull requests
 
 - No "Co-Authored-By: Claude" trailer, no "Generated with Claude Code" footer
+
+## OpenSpec conventions
+
+When exploring, split work into separate changes only when each is
+independently shippable. Name the proposed changes before asking to
+capture. Different files alone isn't a reason to split.
