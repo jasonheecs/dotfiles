@@ -53,7 +53,7 @@ No isolation needed; these should run in well under a second.
 - [ ] 4.2 Confirm `.osx` is never executed anywhere in the workflow — it appears only as an
       argument to `bash -n` and `shellcheck`. Verify by grepping the workflow and
       `tests/*.bats` for `.osx` and checking every hit is a syntax or lint invocation
-- [ ] 4.3 Confirm the cache actually hits: re-run the workflow with `.zimrc` unchanged and
+- [x] 4.3 Confirm the cache actually hits: re-run the workflow with `.zimrc` unchanged and
       verify the log reports a cache hit and the shell layer is faster than the cold run
 - [x] 4.4 Add a Testing section to `README.md` documenting
       `brew bundle --file=tests/Brewfile && bats tests/`; verify the commands in it run
@@ -64,9 +64,9 @@ No isolation needed; these should run in well under a second.
 Broader validation spanning every layer — run after groups 1-4 land. Revert each injection
 after confirming it goes red.
 
-- [ ] 5.1 Inject an unbalanced construct into `.zshrc` and verify `tests/syntax.bats` fails
+- [x] 5.1 Inject an unbalanced construct into `.zshrc` and verify `tests/syntax.bats` fails
       and names the file
-- [ ] 5.2 Remove the `case`-based `PATH` guard from `.zshrc` and verify the duplicate-entry
+- [x] 5.2 Remove the `case`-based `PATH` guard from `.zshrc` and verify the duplicate-entry
       assertion in `tests/shell.bats` fails
 - [ ] 5.3 Delete the `[pretty]` block from `.gitaliases` and verify the git alias test in
       `tests/load.bats` fails
