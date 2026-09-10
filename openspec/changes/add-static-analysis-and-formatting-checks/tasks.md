@@ -43,11 +43,11 @@
 
 ## 4. Add the CI jobs
 
-- [ ] 4.1 Add a job named `shellcheck` to `.github/workflows/ci.yml`, running on
+- [x] 4.1 Add a job named `shellcheck` to `.github/workflows/ci.yml`, running on
       `ubuntu-latest`, triggered by the existing `push` and `pull_request` events, using the
       discovery mechanism settled in group 1 and a pinned analyser version. Verify by pushing
       and confirming a distinctly-named check appears on the run.
-- [ ] 4.2 Add a job named `editorconfig` to the same workflow, running on `ubuntu-latest`,
+- [x] 4.2 Add a job named `editorconfig` to the same workflow, running on `ubuntu-latest`,
       enforcing `.editorconfig` across tracked files with a pinned tool version. Verify by
       pushing and confirming a distinctly-named check appears and passes.
 - [ ] 4.3 Resolve the first full formatting run's findings on files this change did not
