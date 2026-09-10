@@ -3,7 +3,7 @@
 - [x] 1.1 Create `tests/Brewfile` declaring `bats-core` and `shellcheck`; verify
       `brew bundle check --file=tests/Brewfile` reports satisfied after
       `brew bundle --file=tests/Brewfile`
-- [ ] 1.2 Add `tests/.cache/` to `.gitignore`; verify with
+- [x] 1.2 Add `tests/.cache/` to `.gitignore`; verify with
       `git check-ignore -q tests/.cache/anything && echo ignored`
 - [ ] 1.3 Create `tests/helpers/common.bash` exporting a `REPO_ROOT` resolved from
       `${BASH_SOURCE[0]}` (not `$PWD`) plus shared setup helpers; verify by sourcing it from

@@ -36,3 +36,6 @@ npm-debug.log
 # OpenSpec-generated Claude Code files (regenerate with `openspec update`)
 **/.claude/commands/opsx/
 **/.claude/skills/openspec-*/
+
+# Test sandbox cache
+tests/.cache/
