@@ -3,7 +3,7 @@
 - [x] 1.1 Delete the `retag` alias and its comment block from `.gitaliases`. Verify with
       `git config -f .gitaliases --get alias.retag` returning nothing and a non-zero status, and
       `git config -f .gitaliases --list` still parsing.
-- [ ] 1.2 Remove `retag` from the alias list in the `.gitaliases` row of `README.md`. Verify no
+- [x] 1.2 Remove `retag` from the alias list in the `.gitaliases` row of `README.md`. Verify no
       reference to it survives anywhere in the repository.
 
 ## 2. Fix the escaping bugs
