@@ -8,7 +8,7 @@
 
 ## 2. Add the job
 
-- [ ] 2.1 Add a job named `actionlint` to `.github/workflows/ci.yml`, running on `ubuntu-latest`,
+- [x] 2.1 Add a job named `actionlint` to `.github/workflows/ci.yml`, running on `ubuntu-latest`,
       triggered by the existing `push` and `pull_request` events, with a pinned validator
       version. Verify by pushing and confirming a distinctly-named check appears and passes.
 - [ ] 2.2 Verify it catches a structural error: temporarily reference a nonexistent action
