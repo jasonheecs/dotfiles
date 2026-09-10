@@ -17,6 +17,11 @@ operations:
     guidance:
       - Summaries should be done in an eli15 manner
       - Commit after each completed task, before starting the next one
+      - Each commit contains one task's changes plus its tasks.md checkbox update
+      - Functions and modules should follow SRP and be self documenting. Refactor out concerns if necessary.
+      - Extract a helper on code duplication
+      - Leave surrounding code better than you found it; opportunistic cleanup outside the task's scope is welcome
+      - Keep opportunistic cleanup in its own commit, separate from task commits
   archive:
     guidance:
       - Summarize the archive outcome before finishing
