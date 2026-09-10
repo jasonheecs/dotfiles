@@ -18,10 +18,17 @@ Personal dotfiles for zsh, git, vim, and macOS.
 
 ## Setup
 
-Clone the repo, then symlink the files you want into `$HOME`:
+Clone the repo, then run the installer — it links all seven managed dotfiles into `$HOME`,
+backing up anything already there as `<name>.bak`. Pass `--dry-run` to preview:
 
 ```sh
 git clone <repo-url> ~/Projects/dotfiles
+~/Projects/dotfiles/tests/install.sh
+```
+
+Or symlink the files you want by hand:
+
+```sh
 cd ~/Projects/dotfiles
 ln -sf "$PWD/.zshrc"     ~/.zshrc
 ln -sf "$PWD/.zimrc"     ~/.zimrc

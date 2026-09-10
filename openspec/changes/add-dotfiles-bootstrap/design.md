@@ -153,8 +153,9 @@ Order within the change: `install.sh` first, then the tests that drive it, then 
 ## Open Questions
 
 - **Should the README's setup block become `./tests/install.sh`?** It would eliminate the
-  divergence risk entirely. Deferred because the current placement was a deliberate choice
-  and changing it is a separate decision, not a prerequisite for this work.
+  divergence risk entirely. Partly settled during verification: the README now leads with
+  `tests/install.sh` and keeps the hand-written block below it as the by-hand alternative.
+  Deleting the block outright is still deferred — the divergence risk shrinks but remains.
 - **A machine-provisioning Brewfile** (zimfw, fnm, pnpm, and the constraint that pnpm must
   come from Homebrew on this Intel Mac). Still unowned by either change. Would pair
   naturally with this installer if setup ever grows beyond symlinks.
