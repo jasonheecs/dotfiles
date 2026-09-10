@@ -58,7 +58,9 @@ install_link() {
       return
     fi
     echo "replacing: $target"
-    run_or_echo ln -sf "$src" "$target"
+    # -n, else a symlink to a directory gets followed and the new link lands
+    # inside it instead of replacing it.
+    run_or_echo ln -sfn "$src" "$target"
     return
   fi
 

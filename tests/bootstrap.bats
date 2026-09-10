@@ -61,6 +61,16 @@ install_into() {
   [ ! -e "$BATS_TEST_TMPDIR/.vimrc.bak" ]
 }
 
+@test "a symlink pointing at a directory is replaced, not followed" {
+  mkdir "$BATS_TEST_TMPDIR/elsewhere"
+  ln -s "$BATS_TEST_TMPDIR/elsewhere" "$BATS_TEST_TMPDIR/.vimrc"
+
+  run install_into "$BATS_TEST_TMPDIR"
+  [ "$status" -eq 0 ]
+  [ "$BATS_TEST_TMPDIR/.vimrc" -ef "$REPO_ROOT/.vimrc" ]
+  [ -z "$(ls -A "$BATS_TEST_TMPDIR/elsewhere")" ]
+}
+
 @test "--dry-run makes no changes and exits 0" {
   run install_into "$BATS_TEST_TMPDIR" --dry-run
   [ "$status" -eq 0 ]
