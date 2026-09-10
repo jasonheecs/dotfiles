@@ -72,7 +72,7 @@
       that `bats tests/` alone is no longer a complete check, and to give the command for
       running each part locally. Verify by following the README's own instructions from a clean
       shell and getting a clean run of each.
-- [ ] 5.2 Add `editorconfig-checker` to `tests/Brewfile` alongside the existing `shellcheck`
+- [x] 5.2 Add `editorconfig-checker` to `tests/Brewfile` alongside the existing `shellcheck`
       entry, so both linters are installable locally in one step. Verify with
       `brew bundle --file=tests/Brewfile` followed by `command -v shellcheck` and
       `command -v editorconfig-checker`.
