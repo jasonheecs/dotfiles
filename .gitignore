@@ -32,3 +32,7 @@ npm-debug.log
 .gitcredentials
 .zshrc.extra
 **/.claude/settings.local.json
+
+# OpenSpec-generated Claude Code files (regenerate with `openspec update`)
+**/.claude/commands/opsx/
+**/.claude/skills/openspec-*/
