@@ -29,7 +29,7 @@
 
 ## 4. Add the analysis step
 
-- [ ] 4.1 Add a step to the static-analysis job in `.github/workflows/ci.yml` that enumerates
+- [x] 4.1 Add a step to the static-analysis job in `.github/workflows/ci.yml` that enumerates
       shell-prefixed git aliases with `git config -z --get-regexp`, and for each one strips the
       leading `!`, prepends `#!/bin/sh`, appends `"$@"` to the whole value, and runs
       `shellcheck -s sh`. Verify by pushing and confirming the step runs and passes.
