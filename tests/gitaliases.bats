@@ -101,3 +101,31 @@ teardown() {
   [[ "$output" == *"pathspec 'does not exist' did not match"* ]]
   [[ "$output" != *"pathspec 'does' did not match"* ]]
 }
+
+# Destructive, so verified by running it rather than by reading it: pushes a
+# commit to a synthetic refs/pull/7/head (the shape GitHub gives a real PR),
+# rolls main back a commit so mpr has something to bring in, then asserts on
+# the merge, the deleted pr/N branch, and the amended "Close #N" message.
+@test "the mpr git alias merges a synthetic PR ref onto the target branch and closes it" {
+  ALIAS_REMOTE="$(mktemp -d)"
+  git init -q --bare "$ALIAS_REMOTE"
+  git -C "$ALIAS_REPO" remote add origin "$ALIAS_REMOTE"
+  git -C "$ALIAS_REPO" push -q origin main
+
+  echo "pr change" > "$ALIAS_REPO/pr-file.txt"
+  git -C "$ALIAS_REPO" add pr-file.txt
+  git -C "$ALIAS_REPO" -c user.email=test@test -c user.name=test \
+    commit -q -m "pr change"
+  git -C "$ALIAS_REPO" push -q origin "HEAD:refs/pull/7/head"
+  git -C "$ALIAS_REPO" reset -q --hard HEAD~1
+
+  run git -C "$ALIAS_REPO" mpr 7 main
+  [ "$status" -eq 0 ]
+
+  run git -C "$ALIAS_REPO" show-ref --verify --quiet refs/heads/pr/7
+  [ "$status" -ne 0 ]
+
+  message="$(git -C "$ALIAS_REPO" log -1 --pretty=%B)"
+  [[ "$message" == *"pr change"* ]]
+  [[ "$message" == *"Close #7"* ]]
+}

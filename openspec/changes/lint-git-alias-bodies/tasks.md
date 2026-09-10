@@ -60,7 +60,7 @@
       contains a space, asserting the branch is checked out as a single ref. Verify this test
       fails against the pre-fix alias and passes after it, proving it detects the quoting bug
       rather than merely passing.
-- [ ] 5.6 Add an end-to-end test for `mpr` against a throwaway repository containing a synthetic
+- [x] 5.6 Add an end-to-end test for `mpr` against a throwaway repository containing a synthetic
       `refs/pull/N/head` reference: assert it merges that ref onto the expected branch and amends
       the message with the closing reference. This is the destructive alias, so it is verified by
       running it rather than by reading it.
