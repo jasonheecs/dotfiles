@@ -36,7 +36,7 @@
 - [x] 4.2 Verify the step handles a multi-line alias body without corrupting it: confirm `mpr`,
       whose resolved value contains newlines, is analysed as one script and produces no findings
       caused by the extraction itself.
-- [ ] 4.3 Verify the step catches a real regression: temporarily unescape a quote in one alias,
+- [x] 4.3 Verify the step catches a real regression: temporarily unescape a quote in one alias,
       confirm the step goes red and names that alias, then revert.
 - [ ] 4.4 Verify the step covers a new alias without registration: temporarily add a shell alias
       with an unquoted expansion, confirm the step goes red, then revert.
