@@ -1,3 +1,4 @@
+brew "actionlint"
 brew "bats-core"
 brew "shellcheck"
 brew "editorconfig-checker"
