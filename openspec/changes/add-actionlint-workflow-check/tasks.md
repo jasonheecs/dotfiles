@@ -33,7 +33,7 @@
 - [x] 3.2 Update the Testing section of `README.md` to include workflow validation in the list of
       what runs and how to run it locally. Verify by following the README's own instructions from
       a clean shell and getting a clean run.
-- [ ] 3.3 Record in `README.md` that a workflow broken badly enough not to parse will surface as
+- [x] 3.3 Record in `README.md` that a workflow broken badly enough not to parse will surface as
       the automation declining to run rather than as a validation finding, and that running the
       validator locally is what catches that case. Verify a reader can tell from the README what
       a green result does and does not prove.

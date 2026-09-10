@@ -102,3 +102,8 @@ actionlint
 
 These commands approximate what CI runs rather than reproducing it exactly — see
 `.github/workflows/ci.yml` for the authoritative discovery/version pinning.
+
+One limitation on workflow validation: a workflow file broken badly enough that GitHub can't
+parse it never starts the `actionlint` job at all — that failure surfaces as the automation
+declining to run, not as a validation finding, so a green run doesn't prove the workflow parses
+in every respect. Running `actionlint` locally before pushing is what catches that case.
