@@ -33,7 +33,7 @@
       shell-prefixed git aliases with `git config -z --get-regexp`, and for each one strips the
       leading `!`, prepends `#!/bin/sh`, appends `"$@"` to the whole value, and runs
       `shellcheck -s sh`. Verify by pushing and confirming the step runs and passes.
-- [ ] 4.2 Verify the step handles a multi-line alias body without corrupting it: confirm `mpr`,
+- [x] 4.2 Verify the step handles a multi-line alias body without corrupting it: confirm `mpr`,
       whose resolved value contains newlines, is analysed as one script and produces no findings
       caused by the extraction itself.
 - [ ] 4.3 Verify the step catches a real regression: temporarily unescape a quote in one alias,
