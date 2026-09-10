@@ -53,3 +53,25 @@ teardown() {
   [ "$status" -eq 0 ]
   [[ "$output" == *"widget: add frobnicator"* ]]
 }
+
+@test "the lrb git alias lists origin's heads with no argument" {
+  ALIAS_REMOTE="$(mktemp -d)"
+  git init -q --bare "$ALIAS_REMOTE"
+  git -C "$ALIAS_REPO" remote add origin "$ALIAS_REMOTE"
+  git -C "$ALIAS_REPO" push -q origin main
+
+  run git -C "$ALIAS_REPO" lrb
+  [ "$status" -eq 0 ]
+  [[ "$output" == *"refs/heads/main"* ]]
+}
+
+@test "the lrb git alias lists an explicit remote's heads" {
+  ALIAS_REMOTE="$(mktemp -d)"
+  git init -q --bare "$ALIAS_REMOTE"
+  git -C "$ALIAS_REPO" remote add upstream "$ALIAS_REMOTE"
+  git -C "$ALIAS_REPO" push -q upstream main
+
+  run git -C "$ALIAS_REPO" lrb upstream
+  [ "$status" -eq 0 ]
+  [[ "$output" == *"refs/heads/main"* ]]
+}

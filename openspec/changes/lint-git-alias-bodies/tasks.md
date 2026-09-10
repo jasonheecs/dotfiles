@@ -53,7 +53,7 @@
       custom format and the alias are present together.
 - [x] 5.3 Add an end-to-end test for `cm`: commit with a known message in a throwaway repository
       and assert the alias finds it. Verify the test fails if the alias is removed.
-- [ ] 5.4 Add an end-to-end test for `lrb` against a local bare repository acting as `origin`,
+- [x] 5.4 Add an end-to-end test for `lrb` against a local bare repository acting as `origin`,
       asserting it lists that remote's heads. Verify it covers the defaulted argument by
       invoking it with no argument as well as with an explicit remote.
 - [ ] 5.5 Add an end-to-end test for `get` that fetches and checks out a branch whose name
