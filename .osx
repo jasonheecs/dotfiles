@@ -52,7 +52,4 @@ if [[ ! ($* == *--no-restart*) ]]; then
   done
 fi
 
-# TEMP: task 4.4 verification -- unquoted expansion, expect SC2086. Revert.
-echo $HOME
-
 printf "Please log out and log back in to make all settings take effect.\n"

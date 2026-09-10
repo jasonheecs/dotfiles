@@ -50,20 +50,20 @@
 - [x] 4.2 Add a job named `editorconfig` to the same workflow, running on `ubuntu-latest`,
       enforcing `.editorconfig` across tracked files with a pinned tool version. Verify by
       pushing and confirming a distinctly-named check appears and passes.
-- [ ] 4.3 Resolve the first full formatting run's findings on files this change did not
+- [x] 4.3 Resolve the first full formatting run's findings on files this change did not
       anticipate — `openspec/` artifacts, `README.md`, `.github/` YAML. Fix each or add a
       deliberate, reasoned entry to the tool's ignore configuration. Verify the job passes with
       an ignore list short enough to read at a glance.
-- [ ] 4.4 Verify the `shellcheck` job fails on a violation: temporarily introduce an unquoted
+- [x] 4.4 Verify the `shellcheck` job fails on a violation: temporarily introduce an unquoted
       expansion into a bash script, confirm the check goes red and names the file and rule,
       then revert.
-- [ ] 4.5 Verify the `shellcheck` job actually covers `.bats` files: temporarily introduce a
+- [x] 4.5 Verify the `shellcheck` job actually covers `.bats` files: temporarily introduce a
       violation into one of `tests/*.bats`, confirm the check goes red and names that file,
       then revert. This is the specific gap the change exists to close, so it is verified
       directly rather than inferred from 4.4.
-- [ ] 4.6 Verify the `editorconfig` job fails on a violation: temporarily strip the final
+- [x] 4.6 Verify the `editorconfig` job fails on a violation: temporarily strip the final
       newline from a tracked file, confirm the check goes red and names it, then revert.
-- [ ] 4.7 Verify the three jobs are independent: confirm from the run's timing that `test`,
+- [x] 4.7 Verify the three jobs are independent: confirm from the run's timing that `test`,
       `shellcheck`, and `editorconfig` start in parallel and that none is gated on another.
 
 ## 5. Document the split
