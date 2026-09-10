@@ -10,6 +10,11 @@ install_into() {
   HOME="$1" "$INSTALL_SH" "${@:2}"
 }
 
+# TEMP: task 4.5 verification -- unquoted expansion, expect SC2086. Revert.
+temp_violation() {
+  echo $HOME
+}
+
 @test "clean install links all seven managed dotfiles into an empty HOME" {
   run install_into "$BATS_TEST_TMPDIR"
   [ "$status" -eq 0 ]
