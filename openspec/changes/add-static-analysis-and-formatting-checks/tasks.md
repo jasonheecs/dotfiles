@@ -30,7 +30,7 @@
       no trailing whitespace, UTF-8) and per-file-type indent widths: two for shell and bats
       files, four for `.gitconfig`, `.gitaliases`, and `.vimrc`. Verify by opening one file of
       each type in an editor that reads it and confirming the reported indent width matches.
-- [ ] 3.2 Add a final newline to `.gitconfig`, `.gitaliases`, `.tmux.conf`, and `.osx`. Verify
+- [x] 3.2 Add a final newline to `.gitconfig`, `.gitaliases`, `.tmux.conf`, and `.osx`. Verify
       that each file's last byte is a newline, and that `bats tests/` still passes — the suite
       already covers git config parsing, tmux config loading, and `.osx` syntax.
 - [ ] 3.3 Normalise the mixed indentation in `.zshrc` so the `source_if_exists` body matches the
