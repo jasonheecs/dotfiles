@@ -18,9 +18,19 @@ load helpers/common
   done < "$REPO_ROOT/.aliases"
 }
 
+array_entries() {
+  sed -n "/^$1=(/,/^)/p" "$REPO_ROOT/tests/install.sh" | grep -oE '\.[A-Za-z0-9_.-]+'
+}
+
+@test "every excluded file records why it is not installed" {
+  files=$(array_entries EXCLUDED_FILES | grep -c .)
+  reasons=$(sed -n '/^EXCLUDED_REASONS=(/,/^)/p' "$REPO_ROOT/tests/install.sh" | grep -c '"')
+  [ "$files" -eq "$reasons" ]
+}
+
 @test "every tracked root dotfile is installed or excluded by tests/install.sh" {
-  linked=$(sed -n '/^LINK_FILES=(/,/^)/p' "$REPO_ROOT/tests/install.sh" | grep -oE '\.[A-Za-z0-9_.]+')
-  excluded=$(sed -n '/^EXCLUDED_FILES=(/,/^)/p' "$REPO_ROOT/tests/install.sh" | grep -oE '\.[A-Za-z0-9_.]+')
+  linked=$(array_entries LINK_FILES)
+  excluded=$(array_entries EXCLUDED_FILES)
 
   missing=()
   while IFS= read -r f; do
