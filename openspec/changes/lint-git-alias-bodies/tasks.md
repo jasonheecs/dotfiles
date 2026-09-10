@@ -8,7 +8,7 @@
 
 ## 2. Fix the escaping bugs
 
-- [ ] 2.1 Escape the inner quotes in the `lrb` alias so its expansions stay quoted. Verify with
+- [x] 2.1 Escape the inner quotes in the `lrb` alias so its expansions stay quoted. Verify with
       `git config -f .gitaliases --get alias.lrb` showing `remote="${1:-origin}"` and
       `--heads "$remote"` with quotes intact.
 - [ ] 2.2 Escape the inner quotes in the `get` alias. Verify with

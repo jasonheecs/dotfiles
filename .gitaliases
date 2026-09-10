@@ -20,8 +20,8 @@
     # List remote branches
 
     lrb = "!f() { \
-      remote="${1:-origin}"; \
-      git ls-remote --heads "$remote"; \
+      remote=\"${1:-origin}\"; \
+      git ls-remote --heads \"$remote\"; \
     }; f"
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
