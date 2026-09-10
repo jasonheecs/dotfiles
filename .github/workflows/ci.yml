@@ -47,3 +47,12 @@ jobs:
           version: v4.0.1
 
       - run: editorconfig-checker
+
+  actionlint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: raven-actions/actionlint@v2
+        with:
+          version: "1.7.12"
