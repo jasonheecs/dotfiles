@@ -57,17 +57,17 @@ Independent of everything else — this can land alone and closes the original g
 
 ## 4. Installer tests
 
-- [ ] 4.1 Write `tests/bootstrap.bats` covering the clean-install path against
+- [x] 4.1 Write `tests/bootstrap.bats` covering the clean-install path against
       `$BATS_TEST_TMPDIR`: all seven links created and resolving into the repo. Verify
       `bats tests/bootstrap.bats` passes
-- [ ] 4.2 Add the idempotency case: run the installer twice against one temp `HOME` and
+- [x] 4.2 Add the idempotency case: run the installer twice against one temp `HOME` and
       assert the second run creates no `.bak` files, changes no link, and exits 0
-- [ ] 4.3 Add the preservation cases: a pre-seeded regular `.zshrc` survives as `.zshrc.bak`
+- [x] 4.3 Add the preservation cases: a pre-seeded regular `.zshrc` survives as `.zshrc.bak`
       with its contents intact; a correct existing symlink is left untouched; a symlink
       pointing elsewhere is replaced. Verify each asserts independently
-- [ ] 4.4 Add the dry-run case: assert the temp `HOME` is empty afterwards and the exit
+- [x] 4.4 Add the dry-run case: assert the temp `HOME` is empty afterwards and the exit
       status is 0
-- [ ] 4.5 Add the working-directory case: invoke the installer by absolute path from an
+- [x] 4.5 Add the working-directory case: invoke the installer by absolute path from an
       unrelated directory and assert the links still resolve into the repo
 
 ## 5. Fresh-machine CI
