@@ -21,7 +21,7 @@
 - [x] 2.2 Remove the `.osx passes shellcheck` test from `tests/syntax.bats`, leaving its parse
       checks intact. Verify with `bats tests/syntax.bats` passing with one fewer test, and no
       remaining shellcheck invocation in the file.
-- [ ] 2.3 Confirm the whole repository is clean by running the analyser over every bash-family
+- [x] 2.3 Confirm the whole repository is clean by running the analyser over every bash-family
       file at once and verifying it exits 0 with no output.
 
 ## 3. Declare the formatting conventions
