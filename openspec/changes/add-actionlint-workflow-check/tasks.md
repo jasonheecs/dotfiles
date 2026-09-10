@@ -11,7 +11,7 @@
 - [x] 2.1 Add a job named `actionlint` to `.github/workflows/ci.yml`, running on `ubuntu-latest`,
       triggered by the existing `push` and `pull_request` events, with a pinned validator
       version. Verify by pushing and confirming a distinctly-named check appears and passes.
-- [ ] 2.2 Verify it catches a structural error: temporarily set an unknown `with:` input on a
+- [x] 2.2 Verify it catches a structural error: temporarily set an unknown `with:` input on a
       step (e.g. `actions/checkout@v4`, a version actionlint has bundled metadata for), confirm
       the check goes red and names the step, then revert. (`actionlint` does not verify that a
       referenced action or version actually exists — confirmed empirically and in its docs — so
