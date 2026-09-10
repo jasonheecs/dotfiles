@@ -43,7 +43,7 @@
 
 ## 5. Build the alias behaviour suite
 
-- [ ] 5.1 Add `tests/gitaliases.bats` with a helper that creates a throwaway repository, includes
+- [x] 5.1 Add `tests/gitaliases.bats` with a helper that creates a throwaway repository, includes
       the repository's `.gitaliases`, seeds an initial commit, and removes the repository in
       teardown. Verify the helper leaves nothing behind by checking the temporary directory is
       gone after a run, and that no repository outside it is touched.
