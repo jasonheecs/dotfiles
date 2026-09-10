@@ -35,6 +35,14 @@ setup() {
   [ "$output" = "604800" ]
 }
 
+# Derived from $HOME, so this also pins the sandbox: a leak would point it at
+# the real home directory.
+@test "PNPM_HOME is set" {
+  run sandboxed_zsh 'echo $PNPM_HOME'
+  [ "$status" -eq 0 ]
+  [ "$output" = "${ZDOT_SANDBOX}/Library/pnpm" ]
+}
+
 @test "aliases from .aliases are defined" {
   run sandboxed_zsh 'alias Ga'
   [ "$status" -eq 0 ]
