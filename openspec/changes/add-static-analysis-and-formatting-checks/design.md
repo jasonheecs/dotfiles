@@ -177,6 +177,12 @@ one file-level directive, so that a genuine `SC2016` introduced later still fail
 *Alternative considered:* a file-level directive at the top of `tests/shell.bats`. Rejected —
 it blankets the whole file forever, including code not yet written.
 
+The specs' *A suppression without a reason* scenario is enforced by review, not by a check. A
+bare `# shellcheck disable=...` passes CI; nothing greps for an accompanying comment. Writing
+that check means deciding what counts as a reason, which is a judgement a linter cannot make and
+a reader can. If reasonless suppressions ever start accumulating, a directive-must-be-commented
+check is the answer.
+
 ### Remove the `.osx passes shellcheck` test from `tests/syntax.bats`
 
 `.osx` is covered by the new job. Keeping both would mean one file linted twice through two
