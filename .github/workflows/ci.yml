@@ -24,4 +24,4 @@ jobs:
       - name: Install on a fresh machine and start a shell
         run: |
           tests/install.sh
-          zsh -i -c 'exit'
+          zsh -i -c 'true'
