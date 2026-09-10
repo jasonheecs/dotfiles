@@ -1,0 +1,4 @@
+brew "bats-core"
+brew "shellcheck"
+brew "zimfw"
+brew "tmux"

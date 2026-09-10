@@ -1,0 +1,22 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/cache@v6
+        with:
+          path: tests/.cache
+          key: zdot-${{ hashFiles('.zimrc') }}
+
+      - name: Install test tooling
+        run: brew bundle --file=tests/Brewfile
+
+      - name: Run test suite
+        run: bats tests/
