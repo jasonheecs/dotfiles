@@ -39,10 +39,14 @@ None.
 
 ### Modified Capabilities
 
-- `dotfiles-verification`: one rule is added.
+- `dotfiles-verification`: one rule is added, one is corrected.
   - *Workflow definitions are validated* (added) — there is no rule today about whether this
     repository's own automation is correct. The existing linting rule is about shell scripts
     found as files, and no reading of it reaches a YAML workflow or the shell tucked inside one.
+  - *Verification runs automatically on every change* (modified) — it enumerates the independent
+    parts a change must pass. Workflow validation is a new one, so the count goes from three to
+    four, and the rule states outright that only the behavioural suite is tied to a platform —
+    the validator added here runs on Linux, because nothing it checks depends on the machine.
 
 ## Impact
 
