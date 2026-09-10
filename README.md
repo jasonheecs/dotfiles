@@ -12,6 +12,7 @@ Personal dotfiles for zsh, git, vim, and macOS.
 | `.gitconfig` | Global git config — vim as editor, colored output, `osxkeychain` credential helper, includes `.gitaliases` |
 | `.gitaliases` | Custom git aliases/functions (`cc`, `cm`, `lrb`, `mpr`, `retag`, `get`, `pretty`) |
 | `.vimrc` | Vim settings |
+| `.tmux.conf` | tmux config |
 | `.osx` | macOS `defaults write` tweaks for screenshots, Dock, and Mission Control |
 | `.claude/CLAUDE.md` | Project-level Claude Code conventions for this repo |
 
@@ -28,6 +29,7 @@ ln -sf "$PWD/.aliases"   ~/.aliases
 ln -sf "$PWD/.gitconfig" ~/.gitconfig
 ln -sf "$PWD/.gitaliases" ~/.gitaliases
 ln -sf "$PWD/.vimrc"     ~/.vimrc
+ln -sf "$PWD/.tmux.conf" ~/.tmux.conf
 ```
 
 Apply the macOS defaults (optional, restarts affected apps unless `--no-restart` is passed):

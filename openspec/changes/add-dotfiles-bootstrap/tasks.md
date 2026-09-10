@@ -2,9 +2,9 @@
 
 Independent of everything else — this can land alone and closes the original gap.
 
-- [ ] 1.1 Add a `.tmux.conf` row to the contents table in `README.md` describing it as the
+- [x] 1.1 Add a `.tmux.conf` row to the contents table in `README.md` describing it as the
       tmux config; verify `grep -c 'tmux.conf' README.md` returns at least 2 after 1.2
-- [ ] 1.2 Add `ln -sf "$PWD/.tmux.conf" ~/.tmux.conf` to the README setup block, aligned
+- [x] 1.2 Add `ln -sf "$PWD/.tmux.conf" ~/.tmux.conf` to the README setup block, aligned
       with the surrounding lines; verify by running the block's commands against a
       throwaway `$HOME` and confirming seven symlinks result
 
