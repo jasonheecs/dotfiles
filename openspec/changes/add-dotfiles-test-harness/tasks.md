@@ -1,6 +1,6 @@
 ## 1. Test tooling
 
-- [ ] 1.1 Create `tests/Brewfile` declaring `bats-core` and `shellcheck`; verify
+- [x] 1.1 Create `tests/Brewfile` declaring `bats-core` and `shellcheck`; verify
       `brew bundle check --file=tests/Brewfile` reports satisfied after
       `brew bundle --file=tests/Brewfile`
 - [ ] 1.2 Add `tests/.cache/` to `.gitignore`; verify with
