@@ -50,9 +50,11 @@ No isolation needed; these should run in well under a second.
       `macos-latest`: checkout, `actions/cache` on `tests/.cache` keyed by
       `hashFiles('.zimrc')`, `brew bundle --file=tests/Brewfile`, then `bats tests/`.
       Verify by pushing a branch and confirming the job goes green
-- [ ] 4.2 Confirm `.osx` is never executed anywhere in the workflow — it appears only as an
+- [x] 4.2 Confirm `.osx` is never executed anywhere in the workflow — it appears only as an
       argument to `bash -n` and `shellcheck`. Verify by grepping the workflow and
       `tests/*.bats` for `.osx` and checking every hit is a syntax or lint invocation
+      (Verified: `.osx` has no hits in `.github/workflows/ci.yml`, and exactly two in
+      `tests/syntax.bats` — `bash -n` and `shellcheck`.)
 - [x] 4.3 Confirm the cache actually hits: re-run the workflow with `.zimrc` unchanged and
       verify the log reports a cache hit and the shell layer is faster than the cold run
 - [x] 4.4 Add a Testing section to `README.md` documenting
