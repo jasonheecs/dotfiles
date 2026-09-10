@@ -20,7 +20,7 @@
 - [x] 2.3 Verify it catches shell inside a step: temporarily introduce an unquoted expansion into
       a `run:` block, confirm the check goes red and reports the finding against that step, then
       revert. This is the blind spot the change exists to close, so it is verified directly.
-- [ ] 2.4 Verify discovery is automatic: temporarily add a second workflow file containing a
+- [x] 2.4 Verify discovery is automatic: temporarily add a second workflow file containing a
       known error, confirm the check goes red naming that file without anything being registered,
       then revert.
 - [x] 2.5 Verify the job is independent: confirm from the run's timing that it starts in parallel
