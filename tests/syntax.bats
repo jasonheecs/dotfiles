@@ -24,8 +24,3 @@ load helpers/common
   run bash -n "$REPO_ROOT/.osx"
   [ "$status" -eq 0 ]
 }
-
-@test ".osx passes shellcheck" {
-  run shellcheck "$REPO_ROOT/.osx"
-  [ "$status" -eq 0 ]
-}

@@ -18,7 +18,7 @@
       26, 33, and 41, each with a comment stating that the single quotes are deliberate
       because the string must reach the sandboxed shell unexpanded. Verify with
       `shellcheck tests/shell.bats` exiting 0, and `bats tests/shell.bats` still passing.
-- [ ] 2.2 Remove the `.osx passes shellcheck` test from `tests/syntax.bats`, leaving its parse
+- [x] 2.2 Remove the `.osx passes shellcheck` test from `tests/syntax.bats`, leaving its parse
       checks intact. Verify with `bats tests/syntax.bats` passing with one fewer test, and no
       remaining shellcheck invocation in the file.
 - [ ] 2.3 Confirm the whole repository is clean by running the analyser over every bash-family
