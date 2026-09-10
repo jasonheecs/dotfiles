@@ -55,7 +55,7 @@ No isolation needed; these should run in well under a second.
       `tests/*.bats` for `.osx` and checking every hit is a syntax or lint invocation
 - [ ] 4.3 Confirm the cache actually hits: re-run the workflow with `.zimrc` unchanged and
       verify the log reports a cache hit and the shell layer is faster than the cold run
-- [ ] 4.4 Add a Testing section to `README.md` documenting
+- [x] 4.4 Add a Testing section to `README.md` documenting
       `brew bundle --file=tests/Brewfile && bats tests/`; verify the commands in it run
       successfully as written from a clean checkout
 

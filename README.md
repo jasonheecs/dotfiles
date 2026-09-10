@@ -47,3 +47,16 @@ These files are sourced/included if present but are gitignored, so create them y
 
 - [Homebrew](https://brew.sh)
 - [Zim](https://github.com/zimfw/zimfw) for zsh (installed via `zimfw` from Homebrew)
+
+## Testing
+
+The dotfiles are covered by a [bats](https://github.com/bats-core/bats-core) suite that
+checks syntax, config loading, alias sanity, and real shell startup behavior in an isolated
+sandbox. Install the test tooling and run it with:
+
+```sh
+brew bundle --file=tests/Brewfile
+bats tests/
+```
+
+CI runs the same suite on every push and pull request.
