@@ -47,7 +47,7 @@
       the repository's `.gitaliases`, seeds an initial commit, and removes the repository in
       teardown. Verify the helper leaves nothing behind by checking the temporary directory is
       gone after a run, and that no repository outside it is touched.
-- [ ] 5.2 Move the existing `cc` end-to-end test out of `tests/load.bats` into the new file,
+- [x] 5.2 Move the existing `cc` end-to-end test out of `tests/load.bats` into the new file,
       leaving `load.bats` covering only whether each tool accepts its configuration. Verify both
       files pass and the `cc` coverage is preserved, including that it still proves the `[pretty]`
       custom format and the alias are present together.

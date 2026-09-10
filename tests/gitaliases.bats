@@ -32,3 +32,8 @@ teardown() {
   run git -C "$ALIAS_REPO" rev-parse HEAD
   [ "$status" -eq 0 ]
 }
+
+@test "the cc git alias resolves end to end via the [pretty] custom format" {
+  run git -C "$ALIAS_REPO" cc init
+  [ "$status" -eq 0 ]
+}
