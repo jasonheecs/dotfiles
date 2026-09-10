@@ -9,6 +9,8 @@ syntax on
 " Configuration options {{{
 set autoindent " Copy indent from last line when starting new line
 set backspace=indent,eol,start
+set expandtab " Insert spaces instead of a tab character
+set shiftwidth=4 softtabstop=4 " Default indent width; narrowed for shell files below
 set cursorline " Highlight current line
 set diffopt=filler " Add vertical spaces to keep right and left aligned
 set diffopt+=iwhite " Ignore whitespace changes (focus on code changes)
@@ -53,4 +55,14 @@ if ! has('gui_running')
         au InsertLeave * set timeoutlen=1000
     augroup END
 endif
+" }}}
+
+" Indentation by filetype {{{
+" Needed for the FileType autocommand below to ever fire.
+filetype plugin indent on
+" Shell and bats files use two-space indentation; see .editorconfig.
+augroup IndentByFiletype
+    autocmd!
+    autocmd FileType sh,bash,zsh,bats setlocal shiftwidth=2 softtabstop=2
+augroup END
 " }}}

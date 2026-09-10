@@ -1,0 +1,16 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+indent_style = space
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# Shell and bats files: repo convention is two-space indentation.
+[{*.sh,*.bash,.osx,*.bats}]
+indent_size = 2
+
+# These use four-space indentation by convention.
+[{.gitconfig,.gitaliases,.vimrc}]
+indent_size = 4

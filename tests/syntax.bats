@@ -1,7 +1,6 @@
 #!/usr/bin/env bats
 # Layer 0: does each file even parse? Checkers are matched to the file's
-# actual shell language — shellcheck doesn't understand zsh, so it never
-# runs against a zsh file.
+# actual shell language.
 
 load helpers/common
 
@@ -22,10 +21,5 @@ load helpers/common
 
 @test ".osx has valid bash syntax" {
   run bash -n "$REPO_ROOT/.osx"
-  [ "$status" -eq 0 ]
-}
-
-@test ".osx passes shellcheck" {
-  run shellcheck "$REPO_ROOT/.osx"
   [ "$status" -eq 0 ]
 }

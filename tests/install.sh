@@ -20,9 +20,13 @@ LINK_FILES=(
 EXCLUDED_FILES=(
   .osx
   .gitignore
+  .editorconfig
+  .editorconfig-checker.json
 )
 EXCLUDED_REASONS=(
   "executed on demand, never linked"
+  "applies to the repository itself"
+  "applies to the repository itself"
   "applies to the repository itself"
 )
 
