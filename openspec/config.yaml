@@ -16,6 +16,7 @@ operations:
   apply:
     guidance:
       - Summaries should be done in an eli15 manner
+      - Commit after each completed task, before starting the next one
   archive:
     guidance:
       - Summarize the archive outcome before finishing
