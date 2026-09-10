@@ -64,7 +64,7 @@
       `refs/pull/N/head` reference: assert it merges that ref onto the expected branch and amends
       the message with the closing reference. This is the destructive alias, so it is verified by
       running it rather than by reading it.
-- [ ] 5.7 Add a check that every alias defined in `.gitaliases` has a corresponding test, derived
+- [x] 5.7 Add a check that every alias defined in `.gitaliases` has a corresponding test, derived
       from the configuration rather than a hand-written list. Verify it fails when an alias is
       added without a test, by temporarily adding one.
 - [ ] 5.8 Confirm the suite is green and consistent: `bats tests/` passes, and the aliases named

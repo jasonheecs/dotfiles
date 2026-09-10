@@ -129,3 +129,21 @@ teardown() {
   [[ "$message" == *"pr change"* ]]
   [[ "$message" == *"Close #7"* ]]
 }
+
+# Derived from .gitaliases rather than a hand-written list, so a new alias
+# without a matching "the <name> git alias" test description here fails
+# this instead of quietly going unexercised.
+@test "every alias in .gitaliases has a corresponding test in this file" {
+  missing=()
+  while IFS= read -r name; do
+    if ! grep -q "the $name git alias" "$REPO_ROOT/tests/gitaliases.bats"; then
+      missing+=("$name")
+    fi
+  done < <(git config --file "$REPO_ROOT/.gitaliases" --name-only --get-regexp '^alias\.' \
+    | sed 's/^alias\.//')
+
+  if [ "${#missing[@]}" -ne 0 ]; then
+    echo "alias(es) without a test in tests/gitaliases.bats: ${missing[*]}" >&2
+    return 1
+  fi
+}
