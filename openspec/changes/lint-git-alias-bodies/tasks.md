@@ -24,7 +24,7 @@
 - [x] 3.2 Replace the two `declare` uses with plain assignments, since git invokes alias bodies
       under `sh`. Verify the resolved body contains no `declare` and the alias still resolves the
       current branch correctly.
-- [ ] 3.3 Quote the remaining expansions in the body. Verify the resolved body is clean under
+- [x] 3.3 Quote the remaining expansions in the body. Verify the resolved body is clean under
       `shellcheck -s sh` with the shebang and `"$@"` applied.
 
 ## 4. Add the analysis step
