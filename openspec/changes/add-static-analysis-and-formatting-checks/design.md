@@ -7,13 +7,22 @@ The constraints that shape the approach:
 - **Two shell languages, one analyser.** `.zshrc`, `.aliases`, and `.zimrc` are zsh. ShellCheck
   cannot read zsh and never should be pointed at it. The bash-family files are `.osx`,
   `tests/install.sh`, `tests/helpers/common.bash`, and five `.bats` files.
-- **The zsh files have no shebang and no extension.** Discovery that keys on shebangs skips
-  them for free; discovery that keys on filename patterns does not.
-- **`.osx` has no extension either**, but does have `#!/usr/bin/env bash`. So shebang-based
-  discovery is the mechanism that gets both cases right by default.
-- **`.bats` files use `#!/usr/bin/env bats`**, which is not a shell name. ShellCheck itself
-  handles them — verified locally, it analyses the file rather than skipping it — but whether a
-  discovery layer classifies `bats` as a shell is the one genuine unknown here.
+- **`ludeeus/action-shellcheck`'s discovery is name-based first, shebang-based only as a narrow
+  fallback** — verified by reading its `action.yaml` and running it against this repository. Pass
+  one is a hardcoded list of known shell filenames/extensions (`*.sh`, `*.bash`, `.zshrc`, …)
+  plus whatever `additional_files` adds. Pass two greps for a shell shebang, but only among files
+  that are executable *and have no dot anywhere in their name* (`-name '*.*'` excludes them). A
+  leading-dot filename like `.osx` or a `.bats` extension is disqualified from pass two by
+  construction, regardless of its shebang. Neither `.osx` nor any `tests/*.bats` file is
+  discovered without configuration.
+- **`.zshrc` is a false positive by default**, not a free skip. Pass one's hardcoded list
+  includes `.zshrc` as a known filename — matched without ever looking at content or a shebang —
+  so it gets swept in and produces bogus zsh-as-bash findings unless explicitly excluded.
+  `.aliases` and `.zimrc` match neither pass (not on the name list, not executable), so they need
+  no exclusion.
+- **`.bats` files use `#!/usr/bin/env bats`**, which is not a shell name and cannot reach pass
+  two anyway (see above). ShellCheck itself handles the file content fine once given the file —
+  verified locally — the gap was purely in the action's discovery step.
 - **Current ShellCheck baseline is three findings**, all `SC2016`, all in `tests/shell.bats`
   (lines 26, 33, 41). Every other file is clean today.
 - **Current formatting baseline** is four files with no final newline (`.gitconfig`,
@@ -40,7 +49,7 @@ flowchart TD
 
     subgraph lint["job: shellcheck (ubuntu-latest)"]
         direction TB
-        l1[discover shell scripts by shebang] --> l2[shellcheck each]
+        l1["discover: name/extension match<br/>+ additional_files: bats osx<br/>- ignore_names: .zshrc"] --> l2[shellcheck each]
     end
 
     subgraph fmt["job: editorconfig (ubuntu-latest)"]
@@ -55,7 +64,7 @@ flowchart TD
     gate -->|no| bad[change fails]
 
     l1 -.covers.-> shfiles[".osx<br/>tests/install.sh<br/>tests/helpers/common.bash<br/>tests/*.bats"]
-    l1 -.skips.-> zshfiles[".zshrc .aliases .zimrc<br/>(zsh — no shebang)"]
+    l1 -.excludes.-> zshfiles[".zshrc (explicit ignore_names)<br/>.aliases .zimrc (never matched)"]
     f2 -.covers.-> allfiles["every tracked text file<br/>including zsh, git and tmux config"]
 ```
 
@@ -116,21 +125,33 @@ workflow shorter, and a failing step is still visible in the GitHub UI without o
 Rejected because a combined job reports as one red check named `lint`, which is a weaker signal
 than the one the specs ask for, and because the two checks have no reason to share a lifecycle.
 
-### Discover shell scripts by shebang, using an off-the-shelf action
+### Discover shell scripts with an off-the-shelf action, configured for this repo's two edge cases
 
-`ludeeus/action-shellcheck` walks the tree and identifies shell scripts by shebang and
-extension. That is exactly the discovery logic this change would otherwise hand-roll, and the
-repository's conventions favour a well-tested dependency over owning the code.
+`ludeeus/action-shellcheck` walks the tree and identifies shell scripts by name/extension match,
+with shebang-sniffing as a narrow fallback for extensionless executables. That is exactly the
+discovery logic this change would otherwise hand-roll, and the repository's conventions favour a
+well-tested dependency over owning the code — but it needs two explicit inputs to get this
+repository right, settled by reading `action.yaml` and running it live (task 1.1):
 
-Shebang-based discovery is also the mechanism that gets this repository's two awkward cases
-right without configuration: `.osx` is found despite having no extension, and the three zsh
-files are skipped despite sitting at the repository root.
+- `additional_files: "bats osx"` — without it, neither `.osx` nor any `tests/*.bats` file is
+  discovered. Both have a dot in their filename, which disqualifies them from the action's
+  shebang-fallback pass regardless of their shebang line; `additional_files` adds `*bats` and
+  `*osx` name-match clauses to the primary (name-based) discovery pass instead.
+- `ignore_names: ".zshrc"` — without it, `.zshrc` is swept in as a false positive: the action's
+  hardcoded name list includes `.zshrc` as a known shell-rc filename, matched without reading a
+  shebang or any content. `.aliases` and `.zimrc` need no exclusion; neither matches any
+  discovery pass by default.
+
+Verified on a throwaway branch with both inputs set: the run's `files` output names exactly the
+eight expected bash-family files (`.osx`, `tests/install.sh`, `tests/helpers/common.bash`, and
+all five `.bats` files) and none of the three zsh files, with only the three known `SC2016`
+findings reported.
 
 *Alternative considered:* enumerating tracked files with git and routing them by language.
 Roughly eight lines, mirroring the enumeration already in `invariants.bats:57`. It is
-*stricter* — it would catch a tracked script missing its shebang, which shebang-discovery
-silently skips. Rejected for this change because it is code to own and maintain, but it remains
-the fallback if the action cannot be made to cover `.bats` files.
+*stricter* — it would catch a tracked script missing its shebang, which name-based discovery
+silently skips. Rejected — the action's own inputs turned out to be sufficient, so there was
+nothing left for a hand-rolled fallback to fix.
 
 ### Keep ShellCheck's default severity
 
@@ -213,12 +234,10 @@ indentation. Revisit if the repository grows substantially more bash.
 
 ## Risks / Trade-offs
 
-**The action may not classify `#!/usr/bin/env bats` as a shell script** → This would defeat the
-change's main purpose, so it is settled during implementation before anything else, not
-afterwards. The action exposes an input for additional file patterns; if that covers `.bats`,
-use it. If neither shebang detection nor an explicit pattern works, fall back to the git-based
-enumeration described under Decisions. Verify the input names against the action's own
-documentation rather than assuming them.
+**~~The action may not classify `#!/usr/bin/env bats` as a shell script~~** → Resolved during
+implementation (task 1.1): neither `.bats` files nor `.osx` are discovered by default, for a
+different reason than expected (a dot in the filename disqualifies both from the action's
+shebang-fallback pass). `additional_files: "bats osx"` covers both. See Decisions.
 
 **Tool version drift between local Homebrew and CI** → A newer ShellCheck or
 `editorconfig-checker` reports findings an older one does not, producing "clean locally, red in
@@ -261,5 +280,5 @@ Two ordering constraints:
 
 ## Open Questions
 
-None that can be deferred. The `.bats` discovery question is load-bearing and is resolved as the
-first implementation task.
+None. The `.bats` discovery question was load-bearing and resolved as the first implementation
+task (task 1.1) — see Decisions.

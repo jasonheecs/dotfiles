@@ -1,14 +1,14 @@
 ## 1. Settle the discovery question
 
-- [ ] 1.1 Determine whether `ludeeus/action-shellcheck` classifies `#!/usr/bin/env bats` files
+- [x] 1.1 Determine whether `ludeeus/action-shellcheck` classifies `#!/usr/bin/env bats` files
       as shell scripts, by reading the action's documented inputs and running it once against
       this repository on a throwaway branch. Verify by confirming the run's output names all
       five `tests/*.bats` files. Record the finding in `design.md` under Decisions.
-- [ ] 1.2 If 1.1 shows `.bats` files are skipped, bring them into scope using the action's
+- [x] 1.2 If 1.1 shows `.bats` files are skipped, bring them into scope using the action's
       additional-file-pattern input, and verify the same way — the run names all five files.
       If no input achieves it, switch the design to the git-based enumeration fallback
       documented under Decisions and note why in `design.md`.
-- [ ] 1.3 Confirm the same run does NOT name `.zshrc`, `.aliases`, or `.zimrc`. Verify by
+- [x] 1.3 Confirm the same run does NOT name `.zshrc`, `.aliases`, or `.zimrc`. Verify by
       checking those three are absent from the run's file list; if any appears, add an ignore
       rule and re-run until absent.
 
