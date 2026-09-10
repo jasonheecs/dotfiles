@@ -1,9 +1,9 @@
 ## 1. Establish the baseline
 
-- [ ] 1.1 Install `actionlint` locally and run it against the repository, recording every finding
+- [x] 1.1 Install `actionlint` locally and run it against the repository, recording every finding
       against the current `.github/workflows/ci.yml`. Verify by capturing the output, so the
       change starts from a known state rather than discovering it in CI.
-- [ ] 1.2 Resolve each finding from 1.1 — fix it, or suppress it with a stated reason. Verify a
+- [x] 1.2 Resolve each finding from 1.1 — fix it, or suppress it with a stated reason. Verify a
       local run exits 0 with no output.
 
 ## 2. Add the job
