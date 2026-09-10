@@ -48,8 +48,8 @@
     # Fetch origin and checkout
 
     get = "!f() { \
-      git fetch origin "$1"; \
-      git checkout "$1"; \
+      git fetch origin \"$1\"; \
+      git checkout \"$1\"; \
     }; f"
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
