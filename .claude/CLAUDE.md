@@ -5,7 +5,6 @@
 - Keep docstrings and comment blocks short and terse (3-6 lines).
 - Comments explaining non-obvious behavior go next to the line they explain, not in a file-level header.
 - Comments terser than feels natural.
-- Never mention "Phase N" or docs/roadmap.md in code/commits/PRs
 
 ## Code structure
 
@@ -33,4 +32,4 @@
 
 ## Git commits and pull requests
 
-- No "Co-Authored-By: Claude" trailer, no "Generated with Claude Code" footer.
+- No "Co-Authored-By: Claude" trailer, no "Generated with Claude Code" footer
