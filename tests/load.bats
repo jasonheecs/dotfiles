@@ -6,12 +6,14 @@ load helpers/common
 
 setup() {
   TMUX_SOCKET="bats-$$"
+  TMP_REPO=""
 }
 
 teardown() {
-  # Always attempt cleanup, even if the test above failed an assertion, so a
-  # stray private-socket server is never left running.
+  # Always attempt cleanup, even if the test above failed an assertion, so
+  # neither a stray private-socket server nor a temp repo is left behind.
   tmux -L "$TMUX_SOCKET" kill-server 2>/dev/null || true
+  if [ -n "$TMP_REPO" ]; then rm -rf "$TMP_REPO"; fi
 }
 
 @test ".gitconfig parses" {
@@ -25,15 +27,13 @@ teardown() {
 }
 
 @test "the cc git alias resolves end to end via the [pretty] custom format" {
-  tmp_repo="$(mktemp -d)"
-  git -C "$tmp_repo" init -q
-  git -C "$tmp_repo" config --local include.path "$REPO_ROOT/.gitaliases"
-  git -C "$tmp_repo" -c user.email=test@test -c user.name=test commit -q --allow-empty -m init
+  TMP_REPO="$(mktemp -d)"
+  git -C "$TMP_REPO" init -q
+  git -C "$TMP_REPO" config --local include.path "$REPO_ROOT/.gitaliases"
+  git -C "$TMP_REPO" -c user.email=test@test -c user.name=test commit -q --allow-empty -m init
 
-  run git -C "$tmp_repo" cc init
+  run git -C "$TMP_REPO" cc init
   [ "$status" -eq 0 ]
-
-  rm -rf "$tmp_repo"
 }
 
 @test ".vimrc loads and vim quits cleanly" {
