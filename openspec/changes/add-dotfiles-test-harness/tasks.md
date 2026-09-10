@@ -38,7 +38,7 @@ No isolation needed; these should run in well under a second.
       `tests/.cache/zdot`, symlink `.zshrc`/`.zimrc`/`.aliases` into it, and provide a
       helper that runs zsh with both `HOME` and `ZDOTDIR` pointed there. Verify the first
       call warms the cache and a second call is materially faster
-- [ ] 3.2 Write `tests/shell.bats` asserting: interactive startup exits 0 with empty stderr;
+- [x] 3.2 Write `tests/shell.bats` asserting: interactive startup exits 0 with empty stderr;
       `$PNPM_HOME/bin` appears in `PATH` exactly once after loading `.zshrc` twice;
       `HOMEBREW_AUTO_UPDATE_SECS` is `604800`; the `.aliases` aliases are defined; and
       startup succeeds with a stripped `PATH` where `rbenv` and `fnm` are absent. Verify
