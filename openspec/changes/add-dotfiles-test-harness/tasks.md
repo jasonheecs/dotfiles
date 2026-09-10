@@ -13,7 +13,7 @@
 
 No isolation needed; these should run in well under a second.
 
-- [ ] 2.1 Write `tests/syntax.bats`: `zsh -n` over `.zshrc`, `.aliases`, `.zimrc`; `bash -n`
+- [x] 2.1 Write `tests/syntax.bats`: `zsh -n` over `.zshrc`, `.aliases`, `.zimrc`; `bash -n`
       and `shellcheck` over `.osx`. Never shellcheck a zsh file. Verify
       `bats tests/syntax.bats` passes against the current repo
 - [ ] 2.2 Write `tests/load.bats` covering: both git config files parse via
