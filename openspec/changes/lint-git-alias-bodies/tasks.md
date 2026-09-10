@@ -67,5 +67,5 @@
 - [x] 5.7 Add a check that every alias defined in `.gitaliases` has a corresponding test, derived
       from the configuration rather than a hand-written list. Verify it fails when an alias is
       added without a test, by temporarily adding one.
-- [ ] 5.8 Confirm the suite is green and consistent: `bats tests/` passes, and the aliases named
+- [x] 5.8 Confirm the suite is green and consistent: `bats tests/` passes, and the aliases named
       in `README.md` match those defined in `.gitaliases`.
