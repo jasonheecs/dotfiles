@@ -72,11 +72,28 @@ Independent of everything else — this can land alone and closes the original g
 
 ## 5. Fresh-machine CI
 
-- [ ] 5.1 Add a step to `.github/workflows/ci.yml` running `tests/install.sh` against the
+- [x] 5.1 Add a step to `.github/workflows/ci.yml` running `tests/install.sh` against the
       runner's `$HOME`, then `zsh -i -c 'exit'`, asserting exit 0. Verify by pushing a
       branch and reading the run log for the installer output and a clean shell exit
-- [ ] 5.2 Confirm the runner's pre-existing `.zshrc` exercises the backup path — check the
+
+      Note: used `zsh -i -c 'true'` instead of bare `exit`. First push failed CI — bare
+      `exit` propagates `$?` from the last startup command, and on a truly fresh `$HOME`
+      zim's first-ever module install leaves that non-zero (a known zimfw first-boot quirk),
+      so the step failed even though the shell started fine. `shell.bats` already sidesteps
+      this the same way (`sandboxed_zsh 'true'`). Verified via run
+      https://github.com/jasonheecs/dotfiles/actions/runs/34449359262 (branch
+      `worktree-piped-floating-hejlsberg`): installer output and a clean shell exit.
+- [x] 5.2 Confirm the runner's pre-existing `.zshrc` exercises the backup path — check the
       log reports a backup rather than a clean link, which confirms `bootstrap.bats` is
       carrying the clean-path coverage rather than CI
-- [ ] 5.3 Confirm `.osx` is never executed anywhere in the workflow; verify by grepping the
+
+      Note: the runner's pre-existing file was `.gitconfig`, not `.zshrc` (both are shipped
+      on macos-latest runners; `.gitconfig` is the one that pre-exists there) — log shows
+      `backing up: /Users/runner/.gitconfig -> /Users/runner/.gitconfig.bak`, confirming the
+      backup path, not a clean link.
+- [x] 5.3 Confirm `.osx` is never executed anywhere in the workflow; verify by grepping the
       workflow for `.osx` and checking every hit is a syntax or lint invocation
+
+      Note: `grep -n osx .github/workflows/ci.yml` returns no hits at all — `.osx` isn't
+      referenced by name in the workflow; its syntax/shellcheck coverage lives in
+      `tests/syntax.bats`, invoked generically via `bats tests/`.
