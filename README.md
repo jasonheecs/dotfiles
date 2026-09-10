@@ -12,15 +12,23 @@ Personal dotfiles for zsh, git, vim, and macOS.
 | `.gitconfig` | Global git config — vim as editor, colored output, `osxkeychain` credential helper, includes `.gitaliases` |
 | `.gitaliases` | Custom git aliases/functions (`cc`, `cm`, `lrb`, `mpr`, `retag`, `get`, `pretty`) |
 | `.vimrc` | Vim settings |
+| `.tmux.conf` | tmux config |
 | `.osx` | macOS `defaults write` tweaks for screenshots, Dock, and Mission Control |
 | `.claude/CLAUDE.md` | Project-level Claude Code conventions for this repo |
 
 ## Setup
 
-Clone the repo, then symlink the files you want into `$HOME`:
+Clone the repo, then run the installer — it links all seven managed dotfiles into `$HOME`,
+backing up anything already there as `<name>.bak`. Pass `--dry-run` to preview:
 
 ```sh
 git clone <repo-url> ~/Projects/dotfiles
+~/Projects/dotfiles/tests/install.sh
+```
+
+Or symlink the files you want by hand:
+
+```sh
 cd ~/Projects/dotfiles
 ln -sf "$PWD/.zshrc"     ~/.zshrc
 ln -sf "$PWD/.zimrc"     ~/.zimrc
@@ -28,6 +36,7 @@ ln -sf "$PWD/.aliases"   ~/.aliases
 ln -sf "$PWD/.gitconfig" ~/.gitconfig
 ln -sf "$PWD/.gitaliases" ~/.gitaliases
 ln -sf "$PWD/.vimrc"     ~/.vimrc
+ln -sf "$PWD/.tmux.conf" ~/.tmux.conf
 ```
 
 Apply the macOS defaults (optional, restarts affected apps unless `--no-restart` is passed):
