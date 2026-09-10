@@ -36,7 +36,7 @@
 - [x] 3.3 Normalise the mixed indentation in `.zshrc` so the `source_if_exists` body matches the
       two-space convention used by the rest of the file. Verify with `zsh -n .zshrc` and
       `bats tests/shell.bats` both passing.
-- [ ] 3.4 Add `expandtab`, an explicit indent width, and a `FileType` autocommand narrowing
+- [x] 3.4 Add `expandtab`, an explicit indent width, and a `FileType` autocommand narrowing
       shell files to two spaces in `.vimrc`. Verify by opening a `.sh` file and a `.gitconfig`
       in vim, inserting an indent in each, and confirming spaces are written at the expected
       width for that file type.
