@@ -68,7 +68,7 @@
 
 ## 5. Document the split
 
-- [ ] 5.1 Update the Testing section of `README.md` to state that verification has three parts,
+- [x] 5.1 Update the Testing section of `README.md` to state that verification has three parts,
       that `bats tests/` alone is no longer a complete check, and to give the command for
       running each part locally. Verify by following the README's own instructions from a clean
       shell and getting a clean run of each.
