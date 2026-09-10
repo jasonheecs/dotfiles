@@ -5,15 +5,30 @@
 
 load helpers/common
 
+# Reads zsh's own alias table instead of regexing the file, so quoting style,
+# comments, and blank lines are zsh's problem. `unalias -a` drops the two
+# aliases zsh seeds by default (run-help, which-command).
+repo_aliases() {
+  zsh -f -c 'unalias -a; source "$1"; for k v in ${(kv)aliases}; do print -r -- "$k=$v"; done' \
+    zsh "$REPO_ROOT/.aliases"
+}
+
 @test "every alias in .aliases resolves to a command on PATH" {
   if [ -n "$CI" ]; then
     skip "alias targets are machine-dependent"
   fi
 
-  while IFS= read -r line; do
-    value=$(printf '%s\n' "$line" | sed -E 's/^alias [^=]+="(.*)"$/\1/')
-    cmd=$(printf '%s\n' "$value" | awk '{print $1}')
-    run command -v "$cmd"
-    [ "$status" -eq 0 ]
-  done < "$REPO_ROOT/.aliases"
+  run repo_aliases
+  [ "$status" -eq 0 ]
+  # Guards against the check passing vacuously on an unreadable alias table.
+  [ -n "$output" ]
+
+  while IFS= read -r entry; do
+    target=${entry#*=}
+    cmd=${target%% *}
+    if ! command -v "$cmd" >/dev/null 2>&1; then
+      echo "alias ${entry%%=*} -> '$cmd' is not on PATH"
+      return 1
+    fi
+  done <<< "$output"
 }
