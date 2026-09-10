@@ -68,7 +68,7 @@ after confirming it goes red.
       and names the file
 - [x] 5.2 Remove the `case`-based `PATH` guard from `.zshrc` and verify the duplicate-entry
       assertion in `tests/shell.bats` fails
-- [ ] 5.3 Delete the `[pretty]` block from `.gitaliases` and verify the git alias test in
+- [x] 5.3 Delete the `[pretty]` block from `.gitaliases` and verify the git alias test in
       `tests/load.bats` fails
-- [ ] 5.4 Introduce a lint violation into `.osx` and verify the shellcheck assertion in
+- [x] 5.4 Introduce a lint violation into `.osx` and verify the shellcheck assertion in
       `tests/syntax.bats` fails
