@@ -1,7 +1,7 @@
 # Add extra local config if it exists
 source_if_exists()
 {
-    [[ -f "$1" ]] && source "$1"
+  [[ -f "$1" ]] && source "$1"
 }
 
 # Tell Homebrew to not autoupdate every single time I run it (just once a week).

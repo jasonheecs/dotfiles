@@ -33,7 +33,7 @@
 - [x] 3.2 Add a final newline to `.gitconfig`, `.gitaliases`, `.tmux.conf`, and `.osx`. Verify
       that each file's last byte is a newline, and that `bats tests/` still passes — the suite
       already covers git config parsing, tmux config loading, and `.osx` syntax.
-- [ ] 3.3 Normalise the mixed indentation in `.zshrc` so the `source_if_exists` body matches the
+- [x] 3.3 Normalise the mixed indentation in `.zshrc` so the `source_if_exists` body matches the
       two-space convention used by the rest of the file. Verify with `zsh -n .zshrc` and
       `bats tests/shell.bats` both passing.
 - [ ] 3.4 Add `expandtab`, an explicit indent width, and a `FileType` autocommand narrowing
