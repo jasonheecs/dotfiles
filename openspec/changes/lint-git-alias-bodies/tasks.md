@@ -18,7 +18,7 @@
 
 ## 3. Rewrite `mpr`
 
-- [ ] 3.1 Replace the numeric-argument test with a direct one, removing the command substitution
+- [x] 3.1 Replace the numeric-argument test with a direct one, removing the command substitution
       that captures and compares `grep`'s exit status. Verify the alias still rejects a
       non-numeric argument and accepts a numeric one, in a throwaway repository.
 - [ ] 3.2 Replace the two `declare` uses with plain assignments, since git invokes alias bodies
