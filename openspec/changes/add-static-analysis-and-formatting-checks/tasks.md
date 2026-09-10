@@ -26,7 +26,7 @@
 
 ## 3. Declare the formatting conventions
 
-- [ ] 3.1 Add `.editorconfig` with repository-wide settings (space indentation, final newline,
+- [x] 3.1 Add `.editorconfig` with repository-wide settings (space indentation, final newline,
       no trailing whitespace, UTF-8) and per-file-type indent widths: two for shell and bats
       files, four for `.gitconfig`, `.gitaliases`, and `.vimrc`. Verify by opening one file of
       each type in an editor that reads it and confirming the reported indent width matches.

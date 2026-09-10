@@ -193,10 +193,14 @@ files that are not wrong. `.editorconfig` sections express this directly.
 The repository-wide settings are the ones that are genuinely universal: spaces rather than tabs,
 a final newline, no trailing whitespace, UTF-8.
 
-*Note:* `editorconfig-checker` enforces indent *style* reliably but treats indent *size* as
-advisory, because continuation lines and aligned blocks legitimately break a fixed width. So
-`indent_size` here documents intent for the editors and is not expected to be a build gate. The
-`.zshrc` internal mix is therefore fixed by hand in this change rather than caught by the tool.
+*Note:* `editorconfig-checker` enforces indent *size* by default too, which is not what's wanted
+here — `.gitaliases`'s aligned continuation lines (e.g. the multi-line `cc`/`cm`/`mpr` alias
+bodies) legitimately break a fixed width and shouldn't fail the build over it. Verified by
+running the tool once `.editorconfig` existed: it reported six `wrong amount of left-padding
+spaces` findings, all on those continuation lines. `indent_size` is made advisory in practice
+via `.editorconfig-checker.json`'s `Disable.IndentSize: true` — it still documents intent for
+the editors, just isn't a build gate. The `.zshrc` internal mix is fixed by hand in this change
+rather than caught by the tool, since indent *style* (spaces vs. tabs) is what stays enforced.
 
 ### Configure vim directly rather than adding a plugin manager
 
