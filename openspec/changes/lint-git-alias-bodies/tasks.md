@@ -13,7 +13,7 @@
       `--heads "$remote"` with quotes intact.
 - [x] 2.2 Escape the inner quotes in the `get` alias. Verify with
       `git config -f .gitaliases --get alias.get` showing both `"$1"` occurrences quoted.
-- [ ] 2.3 Confirm the two fixed aliases are clean under analysis: extract each resolved body,
+- [x] 2.3 Confirm the two fixed aliases are clean under analysis: extract each resolved body,
       prepend `#!/bin/sh`, append `"$@"`, and verify `shellcheck -s sh` exits 0 for both.
 
 ## 3. Rewrite `mpr`
