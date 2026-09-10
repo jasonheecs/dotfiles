@@ -80,6 +80,9 @@ from `.zshrc`, because it already derives its paths from `ZDOTDIR`.
 
 - `bats-core` (Homebrew) — the test runner
 - `shellcheck` (Homebrew) — already installed locally, now also pinned for CI
+- `zimfw` and `tmux` (Homebrew) — already installed locally, but not present on a clean
+  `macos-latest` runner; the sandboxed shell layer needs `zimfw` to bootstrap `.zshrc`'s zim
+  init, and the config-loading layer needs `tmux` to load `.tmux.conf`
 
 **Safety note**
 

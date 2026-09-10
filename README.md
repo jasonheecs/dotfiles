@@ -8,7 +8,7 @@ Personal dotfiles for zsh, git, vim, and macOS.
 | --- | --- |
 | `.zshrc` | zsh entry point — bootstraps [Zim](https://github.com/zimfw/zimfw), inits `rbenv`/`fnm` if present, adds pnpm to `PATH`, sources `.aliases` and local overrides |
 | `.zimrc` | Zim module manifest (prompt, completions, syntax highlighting, autosuggestions, `agnoster` theme) |
-| `.aliases` | A few shell aliases (`ggl`, `v`, `Ga`) |
+| `.aliases` | A few shell aliases (`Ga`) |
 | `.gitconfig` | Global git config — vim as editor, colored output, `osxkeychain` credential helper, includes `.gitaliases` |
 | `.gitaliases` | Custom git aliases/functions (`cc`, `cm`, `lrb`, `mpr`, `retag`, `get`, `pretty`) |
 | `.vimrc` | Vim settings |
@@ -47,3 +47,16 @@ These files are sourced/included if present but are gitignored, so create them y
 
 - [Homebrew](https://brew.sh)
 - [Zim](https://github.com/zimfw/zimfw) for zsh (installed via `zimfw` from Homebrew)
+
+## Testing
+
+The dotfiles are covered by a [bats](https://github.com/bats-core/bats-core) suite that
+checks syntax, config loading, alias sanity, and real shell startup behavior in an isolated
+sandbox. Install the test tooling and run it with:
+
+```sh
+brew bundle --file=tests/Brewfile
+bats tests/
+```
+
+CI runs the same suite on every push and pull request.
