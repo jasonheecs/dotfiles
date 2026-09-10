@@ -14,7 +14,7 @@ Personal dotfiles for zsh, git, vim, and macOS.
 | `.vimrc` | Vim settings |
 | `.tmux.conf` | tmux config |
 | `.osx` | macOS `defaults write` tweaks for screenshots, Dock, and Mission Control |
-| `.claude/CLAUDE.md` | Project-level Claude Code conventions for this repo |
+| `.claude/CLAUDE.md` | User-level Claude Code preferences |
 
 ## Setup
 
@@ -24,19 +24,6 @@ backing up anything already there as `<name>.bak`. Pass `--dry-run` to preview:
 ```sh
 git clone <repo-url> ~/Projects/dotfiles
 ~/Projects/dotfiles/tests/install.sh
-```
-
-Or symlink the files you want by hand:
-
-```sh
-cd ~/Projects/dotfiles
-ln -sf "$PWD/.zshrc"     ~/.zshrc
-ln -sf "$PWD/.zimrc"     ~/.zimrc
-ln -sf "$PWD/.aliases"   ~/.aliases
-ln -sf "$PWD/.gitconfig" ~/.gitconfig
-ln -sf "$PWD/.gitaliases" ~/.gitaliases
-ln -sf "$PWD/.vimrc"     ~/.vimrc
-ln -sf "$PWD/.tmux.conf" ~/.tmux.conf
 ```
 
 Apply the macOS defaults (optional, restarts affected apps unless `--no-restart` is passed):
@@ -55,15 +42,14 @@ These files are sourced/included if present but are gitignored, so create them y
 ## Requirements
 
 - [Homebrew](https://brew.sh)
-- [Zim](https://github.com/zimfw/zimfw) for zsh (installed via `zimfw` from Homebrew)
+- [Zim](https://github.com/zimfw/zimfw) for zsh
 
 ## Testing
 
-Verification has four independent parts. All four must pass — a clean `bats tests/` run
-locally is not, by itself, a complete check; CI runs all four on every push and pull request as
-separate checks (`test`, `shellcheck`, `editorconfig`, `actionlint`).
+Verification has four independent parts. All four must pass;
+[CI](.github/workflows/ci.yml) runs all four on every push and pull request as separate checks (`test`, `shellcheck`, `editorconfig`, `actionlint`).
 
-Install the tooling for all four with:
+Install the tooling for all four locally with:
 
 ```sh
 brew bundle --file=tests/Brewfile
@@ -99,11 +85,3 @@ inside each `run:` step:
 ```sh
 actionlint
 ```
-
-These commands approximate what CI runs rather than reproducing it exactly — see
-`.github/workflows/ci.yml` for the authoritative discovery/version pinning.
-
-One limitation on workflow validation: a workflow file broken badly enough that GitHub can't
-parse it never starts the `actionlint` job at all — that failure surfaces as the automation
-declining to run, not as a validation finding, so a green run doesn't prove the workflow parses
-in every respect. Running `actionlint` locally before pushing is what catches that case.
