@@ -19,7 +19,7 @@
 - [ ] 2.4 Verify discovery is automatic: temporarily add a second workflow file containing a
       known error, confirm the check goes red naming that file without anything being registered,
       then revert.
-- [ ] 2.5 Verify the job is independent: confirm from the run's timing that it starts in parallel
+- [x] 2.5 Verify the job is independent: confirm from the run's timing that it starts in parallel
       with the other jobs and is not gated on any of them.
 
 ## 3. Make it available locally
