@@ -22,9 +22,11 @@ No isolation needed; these should run in well under a second.
       loads on a private socket (`tmux -L "bats-$$"`) with a `teardown()` that kills that
       server. Verify `bats tests/load.bats` passes and `tmux ls` on the default socket is
       unaffected
-- [ ] 2.3 Remove `alias ggl="google"` from `.aliases` — `google` is not on `PATH`, so the
+- [x] 2.3 Remove `alias ggl="google"` from `.aliases` — `google` is not on `PATH`, so the
       check added in 2.4 would otherwise fail on landing. Verify `zsh -n .aliases` exits 0
       and `grep -c ggl .aliases` returns 0
+      (Also removed `alias v="vagrant"` per user request, and updated the README Contents
+      table for both removals.)
 - [ ] 2.4 Write `tests/invariants.bats` with the alias-target check — each alias in
       `.aliases` resolves to a command on `PATH` — guarded by `skip` when `$CI` is set.
       Verify it passes on this machine after 2.3, reports skipped under

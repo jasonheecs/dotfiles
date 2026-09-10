@@ -8,7 +8,7 @@ Personal dotfiles for zsh, git, vim, and macOS.
 | --- | --- |
 | `.zshrc` | zsh entry point — bootstraps [Zim](https://github.com/zimfw/zimfw), inits `rbenv`/`fnm` if present, adds pnpm to `PATH`, sources `.aliases` and local overrides |
 | `.zimrc` | Zim module manifest (prompt, completions, syntax highlighting, autosuggestions, `agnoster` theme) |
-| `.aliases` | A few shell aliases (`ggl`, `v`, `Ga`) |
+| `.aliases` | A few shell aliases (`Ga`) |
 | `.gitconfig` | Global git config — vim as editor, colored output, `osxkeychain` credential helper, includes `.gitaliases` |
 | `.gitaliases` | Custom git aliases/functions (`cc`, `cm`, `lrb`, `mpr`, `retag`, `get`, `pretty`) |
 | `.vimrc` | Vim settings |
