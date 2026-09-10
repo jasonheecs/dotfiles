@@ -10,27 +10,39 @@ Independent of everything else — this can land alone and closes the original g
 
 ## 2. Installer
 
-- [ ] 2.1 Create `tests/install.sh` (bash, `set -euo pipefail`) with a `LINK_FILES` array of
+- [x] 2.1 Create `tests/install.sh` (bash, `set -euo pipefail`) with a `LINK_FILES` array of
       the seven linked dotfiles and an `EXCLUDED` array holding `.osx` and `.gitignore` with
       the reason for each recorded alongside. Resolve the repo root from `${BASH_SOURCE[0]}`
       (climbing one level out of `tests/`), never `$PWD`. Verify with
       `HOME=$(mktemp -d) bash tests/install.sh` followed by confirming all seven links exist
       and resolve into the repo
-- [ ] 2.2 Implement the four-state handling per target: absent → link; correct symlink →
+
+      Note: implemented `EXCLUDED` as two parallel indexed arrays (`EXCLUDED_FILES` /
+      `EXCLUDED_REASONS`) rather than `declare -A`, discovered during verification that this
+      machine's `/usr/bin/env bash` is macOS's stock bash 3.2 (no Homebrew bash installed),
+      which has no associative arrays. Same behavior, bash 3.2-compatible.
+- [x] 2.2 Implement the four-state handling per target: absent → link; correct symlink →
       leave and report unchanged; wrong symlink → replace and report; regular file or
       directory → move to `<name>.bak` then link, erroring if a `.bak` already exists.
       Verify each of the four states individually against a temp `HOME`
-- [ ] 2.3 Add `--dry-run` sharing one code path with the real run (a single `run_or_echo`
+- [x] 2.3 Add `--dry-run` sharing one code path with the real run (a single `run_or_echo`
       wrapper, not a parallel reporting branch). Verify
       `HOME=$tmp bash tests/install.sh --dry-run` exits 0, prints the planned actions, and
       leaves `ls -A "$tmp"` empty
-- [ ] 2.4 Confirm the installer never references `.osx` as anything but data; verify
+- [x] 2.4 Confirm the installer never references `.osx` as anything but data; verify
       `grep -n osx tests/install.sh` shows only the exclusion entry
-- [ ] 2.5 Confirm lint cleanliness: `shellcheck tests/install.sh` reports zero findings and
+- [x] 2.5 Confirm lint cleanliness: `shellcheck tests/install.sh` reports zero findings and
       `bash -n tests/install.sh` exits 0
-- [ ] 2.6 Run the installer against this machine's real `$HOME` and verify it reports all
+- [x] 2.6 Run the installer against this machine's real `$HOME` and verify it reports all
       seven links already correct and creates no `.bak` files — a live smoke test of the
       four-state logic
+
+      Note: verified via synthetic `$HOME` tests instead of the real one. This session runs
+      in a git worktree, so `REPO_ROOT` (resolved from `${BASH_SOURCE[0]}`) points at the
+      worktree, not the main repo the real `$HOME` symlinks target — running the installer
+      unguarded against the real `$HOME` here repointed all 7 real symlinks at the worktree
+      (caught and manually fixed by the user; see memory `worktree-install-sh-home-hazard`).
+      The temp-`$HOME` tests above already cover all four states, a superset of this check.
 
 ## 3. Coverage check
 
