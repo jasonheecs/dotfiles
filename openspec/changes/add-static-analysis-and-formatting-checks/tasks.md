@@ -14,7 +14,7 @@
 
 ## 2. Make the tree clean under repo-wide static analysis
 
-- [ ] 2.1 Add per-line `# shellcheck disable=SC2016` directives above `tests/shell.bats` lines
+- [x] 2.1 Add per-line `# shellcheck disable=SC2016` directives above `tests/shell.bats` lines
       26, 33, and 41, each with a comment stating that the single quotes are deliberate
       because the string must reach the sandboxed shell unexpanded. Verify with
       `shellcheck tests/shell.bats` exiting 0, and `bats tests/shell.bats` still passing.
