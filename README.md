@@ -59,11 +59,11 @@ These files are sourced/included if present but are gitignored, so create them y
 
 ## Testing
 
-Verification has three independent parts. All three must pass — a clean `bats tests/` run
-locally is not, by itself, a complete check; CI runs all three on every push and pull request as
-separate checks (`test`, `shellcheck`, `editorconfig`).
+Verification has four independent parts. All four must pass — a clean `bats tests/` run
+locally is not, by itself, a complete check; CI runs all four on every push and pull request as
+separate checks (`test`, `shellcheck`, `editorconfig`, `actionlint`).
 
-Install the tooling for all three with:
+Install the tooling for all four with:
 
 ```sh
 brew bundle --file=tests/Brewfile
@@ -90,6 +90,14 @@ spaces not tabs) across every tracked file:
 
 ```sh
 editorconfig-checker
+```
+
+**Workflow validation** — [`actionlint`](https://github.com/rhysd/actionlint) over every file in
+`.github/workflows/`, checking the workflow structure and running ShellCheck over the shell
+inside each `run:` step:
+
+```sh
+actionlint
 ```
 
 These commands approximate what CI runs rather than reproducing it exactly — see

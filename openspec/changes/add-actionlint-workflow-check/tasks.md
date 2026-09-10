@@ -30,7 +30,7 @@
 
 - [x] 3.1 Add `actionlint` to `tests/Brewfile`. Verify with `brew bundle --file=tests/Brewfile`
       followed by `command -v actionlint`.
-- [ ] 3.2 Update the Testing section of `README.md` to include workflow validation in the list of
+- [x] 3.2 Update the Testing section of `README.md` to include workflow validation in the list of
       what runs and how to run it locally. Verify by following the README's own instructions from
       a clean shell and getting a clean run.
 - [ ] 3.3 Record in `README.md` that a workflow broken badly enough not to parse will surface as
