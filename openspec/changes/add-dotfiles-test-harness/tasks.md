@@ -16,7 +16,7 @@ No isolation needed; these should run in well under a second.
 - [x] 2.1 Write `tests/syntax.bats`: `zsh -n` over `.zshrc`, `.aliases`, `.zimrc`; `bash -n`
       and `shellcheck` over `.osx`. Never shellcheck a zsh file. Verify
       `bats tests/syntax.bats` passes against the current repo
-- [ ] 2.2 Write `tests/load.bats` covering: both git config files parse via
+- [x] 2.2 Write `tests/load.bats` covering: both git config files parse via
       `git config --file ... --list`; a git alias depending on `--pretty=custom` runs
       successfully in a throwaway repo; `vim -u .vimrc -es -c ':qa!'` exits 0; `.tmux.conf`
       loads on a private socket (`tmux -L "bats-$$"`) with a `teardown()` that kills that
