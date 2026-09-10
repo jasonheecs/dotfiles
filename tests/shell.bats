@@ -23,6 +23,9 @@ setup() {
 }
 
 @test "pnpm bin dir appears in PATH exactly once after loading .zshrc twice" {
+  # Must reach the sandboxed shell unexpanded so that shell resolves $PATH,
+  # not this one.
+  # shellcheck disable=SC2016
   run sandboxed_zsh 'source "$ZDOTDIR/.zshrc"; echo $PATH'
   [ "$status" -eq 0 ]
   count=$(grep -o "${ZDOT_SANDBOX}/Library/pnpm/bin" <<< "$output" | wc -l | tr -d ' ')
@@ -30,6 +33,9 @@ setup() {
 }
 
 @test "HOMEBREW_AUTO_UPDATE_SECS is set" {
+  # Must reach the sandboxed shell unexpanded so that shell resolves
+  # $HOMEBREW_AUTO_UPDATE_SECS, not this one.
+  # shellcheck disable=SC2016
   run sandboxed_zsh 'echo $HOMEBREW_AUTO_UPDATE_SECS'
   [ "$status" -eq 0 ]
   [ "$output" = "604800" ]
@@ -38,6 +44,9 @@ setup() {
 # Derived from $HOME, so this also pins the sandbox: a leak would point it at
 # the real home directory.
 @test "PNPM_HOME is set" {
+  # Must reach the sandboxed shell unexpanded so that shell resolves
+  # $PNPM_HOME, not this one.
+  # shellcheck disable=SC2016
   run sandboxed_zsh 'echo $PNPM_HOME'
   [ "$status" -eq 0 ]
   [ "$output" = "${ZDOT_SANDBOX}/Library/pnpm" ]

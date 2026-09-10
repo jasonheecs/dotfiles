@@ -59,13 +59,38 @@ These files are sourced/included if present but are gitignored, so create them y
 
 ## Testing
 
-The dotfiles are covered by a [bats](https://github.com/bats-core/bats-core) suite that
-checks syntax, config loading, alias sanity, and real shell startup behavior in an isolated
-sandbox. Install the test tooling and run it with:
+Verification has three independent parts. All three must pass — a clean `bats tests/` run
+locally is not, by itself, a complete check; CI runs all three on every push and pull request as
+separate checks (`test`, `shellcheck`, `editorconfig`).
+
+Install the tooling for all three with:
 
 ```sh
 brew bundle --file=tests/Brewfile
+```
+
+**Behavioural suite** — a [bats](https://github.com/bats-core/bats-core) suite that checks
+syntax, config loading, alias sanity, and real shell startup behavior in an isolated sandbox:
+
+```sh
 bats tests/
 ```
 
-CI runs the same suite on every push and pull request.
+**Static analysis** — [ShellCheck](https://www.shellcheck.net) over every bash-family script in
+the repository (`.osx`, `tests/install.sh`, `tests/helpers/common.bash`, and the `.bats` files
+themselves):
+
+```sh
+shellcheck .osx tests/install.sh tests/helpers/common.bash tests/*.bats
+```
+
+**Formatting** — [editorconfig-checker](https://github.com/editorconfig-checker/editorconfig-checker)
+enforces the conventions declared in `.editorconfig` (final newline, no trailing whitespace,
+spaces not tabs) across every tracked file:
+
+```sh
+editorconfig-checker
+```
+
+These commands approximate what CI runs rather than reproducing it exactly — see
+`.github/workflows/ci.yml` for the authoritative discovery/version pinning.
