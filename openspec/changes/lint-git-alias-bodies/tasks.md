@@ -38,7 +38,7 @@
       caused by the extraction itself.
 - [x] 4.3 Verify the step catches a real regression: temporarily unescape a quote in one alias,
       confirm the step goes red and names that alias, then revert.
-- [ ] 4.4 Verify the step covers a new alias without registration: temporarily add a shell alias
+- [x] 4.4 Verify the step covers a new alias without registration: temporarily add a shell alias
       with an unquoted expansion, confirm the step goes red, then revert.
 
 ## 5. Build the alias behaviour suite
