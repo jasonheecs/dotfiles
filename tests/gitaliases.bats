@@ -75,3 +75,29 @@ teardown() {
   [ "$status" -eq 0 ]
   [[ "$output" == *"refs/heads/main"* ]]
 }
+
+@test "the get git alias fetches and checks out a branch from origin" {
+  ALIAS_REMOTE="$(mktemp -d)"
+  git init -q --bare "$ALIAS_REMOTE"
+  git -C "$ALIAS_REPO" remote add origin "$ALIAS_REMOTE"
+  git -C "$ALIAS_REPO" push -q origin main
+  git -C "$ALIAS_REPO" push -q origin main:feature
+
+  run git -C "$ALIAS_REPO" get feature
+  [ "$status" -eq 0 ]
+
+  current="$(git -C "$ALIAS_REPO" symbolic-ref --short HEAD)"
+  [ "$current" = "feature" ]
+}
+
+# git rejects a literal ref name containing a space everywhere (branch
+# creation, remote advertisement), so this can't be proven by checking one
+# out. Instead it asks for a pathspec that doesn't exist and reads the
+# quoting off checkout's own error: one "pathspec 'does not exist'" means
+# $1 arrived whole; three single-word pathspec errors mean it didn't.
+@test "the get git alias treats an argument containing a space as one value" {
+  run git -C "$ALIAS_REPO" get "does not exist"
+  [ "$status" -ne 0 ]
+  [[ "$output" == *"pathspec 'does not exist' did not match"* ]]
+  [[ "$output" != *"pathspec 'does' did not match"* ]]
+}
