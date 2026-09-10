@@ -34,7 +34,7 @@ No isolation needed; these should run in well under a second.
 
 ## 3. Sandboxed shell layer (3)
 
-- [ ] 3.1 Extend `tests/helpers/common.bash` with the zsh sandbox: create
+- [x] 3.1 Extend `tests/helpers/common.bash` with the zsh sandbox: create
       `tests/.cache/zdot`, symlink `.zshrc`/`.zimrc`/`.aliases` into it, and provide a
       helper that runs zsh with both `HOME` and `ZDOTDIR` pointed there. Verify the first
       call warms the cache and a second call is materially faster
