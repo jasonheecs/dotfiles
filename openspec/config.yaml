@@ -1,0 +1,21 @@
+schema: spec-driven
+
+context: |
+  This is a personal dotfiles repository. It contains configuration files for various tools and applications that I use on my personal computer. The purpose of this repository is to keep my dotfiles organized and easily accessible, so that I can quickly set up a new environment.
+
+rules:
+  proposal:
+    - Craft the proposal in an eli15 manner
+    - Link to the design.md diagram when one exists
+  design:
+    - Include a Mermaid diagram in design.md for any change touching more than one component, and include a link to the diagram in the proposal
+  tasks:
+    - Break tasks into independent, self-contained units of work, as much as possible
+
+operations:
+  apply:
+    guidance:
+      - Summaries should be done in an eli15 manner
+  archive:
+    guidance:
+      - Summarize the archive outcome before finishing
