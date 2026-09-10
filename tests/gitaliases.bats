@@ -10,7 +10,14 @@ load helpers/common
 # .gitaliases included and one seeded commit, so aliases that need a HEAD
 # have one to act on. teardown() removes it, and $ALIAS_REMOTE when a test
 # sets one.
+#
+# GIT_CONFIG_GLOBAL/_SYSTEM point at /dev/null so the developer's own
+# ~/.gitconfig can't leak an alias of the same name into these tests --
+# aliases here resolve only from $ALIAS_REPO's local config.
 setup() {
+  export GIT_CONFIG_GLOBAL=/dev/null
+  export GIT_CONFIG_SYSTEM=/dev/null
+
   ALIAS_REPO="$(mktemp -d)"
   git -C "$ALIAS_REPO" init -q -b main
   git -C "$ALIAS_REPO" config --local include.path "$REPO_ROOT/.gitaliases"
@@ -36,4 +43,13 @@ teardown() {
 @test "the cc git alias resolves end to end via the [pretty] custom format" {
   run git -C "$ALIAS_REPO" cc init
   [ "$status" -eq 0 ]
+}
+
+@test "the cm git alias finds a commit by its message" {
+  git -C "$ALIAS_REPO" -c user.email=test@test -c user.name=test \
+    commit -q --allow-empty -m "widget: add frobnicator"
+
+  run git -C "$ALIAS_REPO" cm frobnicator
+  [ "$status" -eq 0 ]
+  [[ "$output" == *"widget: add frobnicator"* ]]
 }

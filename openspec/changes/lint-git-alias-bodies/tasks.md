@@ -51,7 +51,7 @@
       leaving `load.bats` covering only whether each tool accepts its configuration. Verify both
       files pass and the `cc` coverage is preserved, including that it still proves the `[pretty]`
       custom format and the alias are present together.
-- [ ] 5.3 Add an end-to-end test for `cm`: commit with a known message in a throwaway repository
+- [x] 5.3 Add an end-to-end test for `cm`: commit with a known message in a throwaway repository
       and assert the alias finds it. Verify the test fails if the alias is removed.
 - [ ] 5.4 Add an end-to-end test for `lrb` against a local bare repository acting as `origin`,
       asserting it lists that remote's heads. Verify it covers the defaulted argument by
