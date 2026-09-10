@@ -27,7 +27,7 @@ No isolation needed; these should run in well under a second.
       and `grep -c ggl .aliases` returns 0
       (Also removed `alias v="vagrant"` per user request, and updated the README Contents
       table for both removals.)
-- [ ] 2.4 Write `tests/invariants.bats` with the alias-target check — each alias in
+- [x] 2.4 Write `tests/invariants.bats` with the alias-target check — each alias in
       `.aliases` resolves to a command on `PATH` — guarded by `skip` when `$CI` is set.
       Verify it passes on this machine after 2.3, reports skipped under
       `CI=1 bats tests/invariants.bats`, and fails if a bogus alias is temporarily added
