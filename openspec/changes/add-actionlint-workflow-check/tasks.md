@@ -17,7 +17,7 @@
       referenced action or version actually exists — confirmed empirically and in its docs — so
       an unresolvable reference does not produce a finding; an unknown input on a known action
       does.)
-- [ ] 2.3 Verify it catches shell inside a step: temporarily introduce an unquoted expansion into
+- [x] 2.3 Verify it catches shell inside a step: temporarily introduce an unquoted expansion into
       a `run:` block, confirm the check goes red and reports the finding against that step, then
       revert. This is the blind spot the change exists to close, so it is verified directly.
 - [ ] 2.4 Verify discovery is automatic: temporarily add a second workflow file containing a
