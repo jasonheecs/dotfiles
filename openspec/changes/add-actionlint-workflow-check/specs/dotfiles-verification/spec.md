@@ -7,10 +7,14 @@ covering both the workflow structure and any shell embedded in its steps. Valida
 every workflow file present, discovered rather than listed by hand, so that adding a workflow
 brings it into scope. A validation finding SHALL fail verification.
 
-#### Scenario: A workflow references an action that does not exist
+#### Scenario: A workflow step sets an input an action does not define
 
-- **WHEN** a workflow step references an action or a version that cannot be resolved
+- **WHEN** a workflow step sets a `with:` input that is not defined by the action it references
 - **THEN** verification fails and names the step
+
+Note: validation of action references is limited to what the validator can check offline. It
+does not confirm that a referenced action or version actually exists on GitHub — only that
+`with:` inputs match the action's known schema, for actions it has metadata for.
 
 #### Scenario: A workflow expression is malformed
 
