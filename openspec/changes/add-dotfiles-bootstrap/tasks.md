@@ -46,13 +46,13 @@ Independent of everything else — this can land alone and closes the original g
 
 ## 3. Coverage check
 
-- [ ] 3.1 Add the coverage check to `tests/invariants.bats` — every path from
+- [x] 3.1 Add the coverage check to `tests/invariants.bats` — every path from
       `git ls-files -- '.*' | grep -v '/'` must appear in `LINK_FILES` or `EXCLUDED`.
       Create the file if the harness change has not already; add to it if it exists. Verify
       it passes against the current repo
-- [ ] 3.2 Verify the check actually catches drift: `git add` a throwaway `.foo` at the repo
+- [x] 3.2 Verify the check actually catches drift: `git add` a throwaway `.foo` at the repo
       root, confirm `bats tests/invariants.bats` fails and names `.foo`, then remove it
-- [ ] 3.3 Verify the exclusion path: confirm the check passes without demanding that `.osx`
+- [x] 3.3 Verify the exclusion path: confirm the check passes without demanding that `.osx`
       or `.gitignore` be linked, and that removing an entry from `EXCLUDED` makes it fail
 
 ## 4. Installer tests

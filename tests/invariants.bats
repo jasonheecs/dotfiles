@@ -17,3 +17,20 @@ load helpers/common
     [ "$status" -eq 0 ]
   done < "$REPO_ROOT/.aliases"
 }
+
+@test "every tracked root dotfile is installed or excluded by tests/install.sh" {
+  linked=$(sed -n '/^LINK_FILES=(/,/^)/p' "$REPO_ROOT/tests/install.sh" | grep -oE '\.[A-Za-z0-9_.]+')
+  excluded=$(sed -n '/^EXCLUDED_FILES=(/,/^)/p' "$REPO_ROOT/tests/install.sh" | grep -oE '\.[A-Za-z0-9_.]+')
+
+  missing=()
+  while IFS= read -r f; do
+    if ! grep -qxF "$f" <<< "$linked" && ! grep -qxF "$f" <<< "$excluded"; then
+      missing+=("$f")
+    fi
+  done < <(git -C "$REPO_ROOT" ls-files -- '.*' | grep -v '/')
+
+  if [ "${#missing[@]}" -ne 0 ]; then
+    echo "unaccounted-for dotfile(s): ${missing[*]}" >&2
+    return 1
+  fi
+}
