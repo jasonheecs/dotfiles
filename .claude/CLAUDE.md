@@ -34,6 +34,10 @@
 
 - No "Co-Authored-By: Claude" trailer, no "Generated with Claude Code" footer
 
+## Tools
+
+- If a browser is needed (e.g. to inspect a page, test a UI, or take a screenshot), use the `playwright-cli` CLI tool rather than a browser MCP server.
+
 ## OpenSpec conventions
 
 When exploring, split work into separate changes only when each is
