@@ -37,6 +37,9 @@ jobs:
           additional_files: "bats osx"
           ignore_names: ".zshrc"
 
+      - name: Lint git alias bodies
+        run: tests/lint-gitaliases.sh
+
   editorconfig:
     runs-on: ubuntu-latest
     steps:

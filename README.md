@@ -10,7 +10,7 @@ Personal dotfiles for zsh, git, vim, and macOS.
 | `.zimrc` | Zim module manifest (prompt, completions, syntax highlighting, autosuggestions, `agnoster` theme) |
 | `.aliases` | A few shell aliases (`Ga`) |
 | `.gitconfig` | Global git config — vim as editor, colored output, `osxkeychain` credential helper, includes `.gitaliases` |
-| `.gitaliases` | Custom git aliases/functions (`cc`, `cm`, `lrb`, `mpr`, `retag`, `get`, `pretty`) |
+| `.gitaliases` | Custom git aliases/functions (`cc`, `cm`, `lrb`, `mpr`, `get`, `pretty`) |
 | `.vimrc` | Vim settings |
 | `.tmux.conf` | tmux config |
 | `.osx` | macOS `defaults write` tweaks for screenshots, Dock, and Mission Control |
