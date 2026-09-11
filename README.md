@@ -83,4 +83,7 @@ conventions in `.editorconfig`), and **workflow validation**
 ([`actionlint`](https://github.com/rhysd/actionlint) over `.github/workflows/`).
 
 A clean local run is a strong signal, not a guarantee: tool versions can differ from what CI
-pins, and the lint checks run on Linux in CI but macOS locally.
+pins, and the lint checks run on Linux in CI but macOS locally. CI's `test` and `editorconfig`
+jobs run `make test` and `make lint-format`, so those two cannot drift from what you run. Its
+`shellcheck` and `actionlint` jobs run pinned marketplace actions instead, so `make lint-shell`
+and `make lint-workflow` match those checks rather than being what CI calls.
