@@ -14,8 +14,10 @@ check: lint-shell lint-format lint-workflow ## Run every check (behavioural suit
 test: ## Run the bats behavioural suite
 	bats tests/
 
+# Scripts are discovered, not enumerated, so a new one needs no registration.
+# Patterns mirror what CI's shellcheck action finds; .zshrc and .aliases are zsh.
 lint-shell: ## Run ShellCheck over scripts and git alias bodies
-	shellcheck .osx install.sh tests/helpers/common.bash tests/*.bats
+	shellcheck $$(git ls-files '*.sh' '*.bash' '*.bats' '.osx')
 	tests/lint-gitaliases.sh
 
 lint-format: ## Check formatting against .editorconfig
