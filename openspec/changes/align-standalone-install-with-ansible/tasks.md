@@ -76,14 +76,14 @@
 
 ## 8. Document both paths
 
-- [ ] 8.1 Update the Setup section of `README.md` for the new installer path and the extended
+- [x] 8.1 Update the Setup section of `README.md` for the new installer path and the extended
       file list, replacing the hand-written `ln` commands with the current entries. Verify by
       following the README's manual instructions against a sandbox home and getting the same
       links the installer produces.
-- [ ] 8.2 Add the missing `.gitignore` row to the Contents table, noting it is the global
+- [x] 8.2 Add the missing `.gitignore` row to the Contents table, noting it is the global
       excludes file, and an `.editorconfig` row noting it configures both this repository and
       your other projects. Verify every linked entry in the manifest now appears in the table.
-- [ ] 8.3 Add a short note to `README.md` explaining that these dotfiles are normally installed by
+- [x] 8.3 Add a short note to `README.md` explaining that these dotfiles are normally installed by
       the `mac-dev-setup` playbook, that the installer is the standalone route, and that both
       produce the same links. Verify a reader can tell from the README alone which route to use
       and that the two are equivalent.
