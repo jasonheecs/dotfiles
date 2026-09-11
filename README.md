@@ -81,3 +81,6 @@ resolved body), **formatting**
 ([editorconfig-checker](https://github.com/editorconfig-checker/editorconfig-checker) against the
 conventions in `.editorconfig`), and **workflow validation**
 ([`actionlint`](https://github.com/rhysd/actionlint) over `.github/workflows/`).
+
+A clean local run is a strong signal, not a guarantee: tool versions can differ from what CI
+pins, and the lint checks run on Linux in CI but macOS locally.

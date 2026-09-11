@@ -62,6 +62,6 @@
 - [x] 4.1 Replace the command list in the README's Testing section with the aggregate command,
       keeping the provisioning step alongside it as a separate, explicit action. Verify by
       following the README from a clean shell and getting a complete run.
-- [ ] 4.2 Record in `README.md` that the aggregate is a strong signal rather than a guarantee,
+- [x] 4.2 Record in `README.md` that the aggregate is a strong signal rather than a guarantee,
       because tool versions and platforms still differ between a local run and the automation.
       Verify a reader can tell what a clean local run does and does not prove.
