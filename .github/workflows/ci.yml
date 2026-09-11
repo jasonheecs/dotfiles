@@ -49,7 +49,7 @@ jobs:
         with:
           version: v4.0.1
 
-      - run: editorconfig-checker
+      - run: make lint-format
 
   actionlint:
     runs-on: ubuntu-latest

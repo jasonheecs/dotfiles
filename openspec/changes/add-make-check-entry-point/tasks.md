@@ -17,8 +17,15 @@
 - [x] 2.1 Replace the behavioural job's inline commands in `.github/workflows/ci.yml` with its
       target invocation. Verify by pushing and confirming the job passes and its log shows the
       same commands running.
-- [ ] 2.2 Replace each lint job's inline commands with its target invocation. Verify each job
+- [x] 2.2 Replace each lint job's inline commands with its target invocation. Verify each job
       still passes and each still reports under its own check name.
+
+      Scope note: only the `editorconfig` job has a genuinely inline command to redirect.
+      `shellcheck` and `actionlint` run their tool via GitHub Marketplace actions that install a
+      pinned version and run the check in one atomic step — neither supports install-only mode,
+      so there's no inline command to point at a target without replacing the action outright.
+      Per the user's explicit decision this session, those two jobs are left unchanged; `lint-shell`
+      and `lint-workflow` exist for local use only. See tasks 2.3/2.4 for the resulting scope.
 - [ ] 2.3 Verify the definitions are genuinely shared: change a flag in one target, confirm the
       corresponding CI job picks it up without the workflow being edited, then revert.
 - [ ] 2.4 Verify a check cannot exist without a target: confirm every job's step invokes a
