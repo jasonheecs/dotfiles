@@ -67,33 +67,17 @@ Install the tooling for all four locally with:
 brew bundle --file=tests/Brewfile
 ```
 
-**Behavioural suite** — a [bats](https://github.com/bats-core/bats-core) suite that checks
-syntax, config loading, alias sanity, and real shell startup behavior in an isolated sandbox:
+Then run everything with one command:
 
 ```sh
-bats tests/
+make check
 ```
 
-**Static analysis** — [ShellCheck](https://www.shellcheck.net) over every bash-family script in
-the repository (`.osx`, `install.sh`, `tests/helpers/common.bash`, and the `.bats` files
-themselves):
-
-```sh
-shellcheck .osx install.sh tests/helpers/common.bash tests/*.bats
-```
-
-**Formatting** — [editorconfig-checker](https://github.com/editorconfig-checker/editorconfig-checker)
-enforces the conventions declared in `.editorconfig` (final newline, no trailing whitespace,
-spaces not tabs, indent size) across every tracked file:
-
-```sh
-editorconfig-checker
-```
-
-**Workflow validation** — [`actionlint`](https://github.com/rhysd/actionlint) over every file in
-`.github/workflows/`, checking the workflow structure and running ShellCheck over the shell
-inside each `run:` step:
-
-```sh
-actionlint
-```
+Run `make help` to list the parts and run one on its own while iterating — the **behavioural
+suite** (a [bats](https://github.com/bats-core/bats-core) suite checking syntax, config loading,
+alias sanity, and real shell startup behavior in an isolated sandbox), **static analysis**
+([ShellCheck](https://www.shellcheck.net) over every bash-family script plus each git alias's
+resolved body), **formatting**
+([editorconfig-checker](https://github.com/editorconfig-checker/editorconfig-checker) against the
+conventions in `.editorconfig`), and **workflow validation**
+([`actionlint`](https://github.com/rhysd/actionlint) over `.github/workflows/`).

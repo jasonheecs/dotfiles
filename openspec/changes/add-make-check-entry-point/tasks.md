@@ -59,7 +59,7 @@
 
 ## 4. Document the single command
 
-- [ ] 4.1 Replace the command list in the README's Testing section with the aggregate command,
+- [x] 4.1 Replace the command list in the README's Testing section with the aggregate command,
       keeping the provisioning step alongside it as a separate, explicit action. Verify by
       following the README from a clean shell and getting a complete run.
 - [ ] 4.2 Record in `README.md` that the aggregate is a strong signal rather than a guarantee,
