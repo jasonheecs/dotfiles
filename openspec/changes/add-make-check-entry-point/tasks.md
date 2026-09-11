@@ -9,7 +9,7 @@
 - [x] 1.3 Make the aggregate report the behavioural suite as skipped, with a reason, when the
       macOS tooling it needs is absent, rather than failing. Verify by running the aggregate with
       that tooling unavailable and confirming it reports a skip and continues.
-- [ ] 1.4 Confirm no target installs software. Verify by reading the recipes and checking that
+- [x] 1.4 Confirm no target installs software. Verify by reading the recipes and checking that
       provisioning is absent from all of them.
 
 ## 2. Point the automation at the same definitions
