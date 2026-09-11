@@ -1,23 +1,57 @@
 #!/usr/bin/env bats
-# Drives tests/install.sh against a throwaway HOME, covering the four-state
+# Drives install.sh against a throwaway HOME, covering the four-state
 # logic, idempotency, --dry-run, and invocation from an unrelated cwd.
 
 load helpers/common
 
-INSTALL_SH="$REPO_ROOT/tests/install.sh"
+INSTALL_SH="$REPO_ROOT/install.sh"
 
 install_into() {
   HOME="$1" "$INSTALL_SH" "${@:2}"
 }
 
-@test "clean install links all seven managed dotfiles into an empty HOME" {
+@test "clean install links every managed dotfile into an empty HOME" {
   run install_into "$BATS_TEST_TMPDIR"
   [ "$status" -eq 0 ]
 
-  for f in .zshrc .zimrc .aliases .gitconfig .gitaliases .vimrc .tmux.conf; do
+  # Asked of the installer rather than repeated here, so adding a dotfile
+  # needs no edit to this file. Sandboxed like every other invocation, so a
+  # --list that stopped exiting early couldn't reach the real $HOME.
+  managed=$(install_into "$BATS_TEST_TMPDIR" --list)
+  # Guards against the loop passing vacuously on an empty list.
+  [ -n "$managed" ]
+
+  while IFS= read -r f; do
     [ -L "$BATS_TEST_TMPDIR/$f" ]
     [ "$BATS_TEST_TMPDIR/$f" -ef "$REPO_ROOT/$f" ]
-  done
+  done <<< "$managed"
+}
+
+@test "a nested entry is linked inside a real directory, not a linked one" {
+  run install_into "$BATS_TEST_TMPDIR"
+  [ "$status" -eq 0 ]
+
+  [ "$BATS_TEST_TMPDIR/.claude/CLAUDE.md" -ef "$REPO_ROOT/.claude/CLAUDE.md" ]
+  # ~/.claude holds live local state, so only the one file is managed —
+  # linking the directory itself would replace it with the repo's copy.
+  [ -d "$BATS_TEST_TMPDIR/.claude" ]
+  [ ! -L "$BATS_TEST_TMPDIR/.claude" ]
+}
+
+@test "a second run leaves a nested entry unchanged with no backup" {
+  install_into "$BATS_TEST_TMPDIR"
+
+  run install_into "$BATS_TEST_TMPDIR"
+  [ "$status" -eq 0 ]
+  [[ "$output" == *"unchanged: $BATS_TEST_TMPDIR/.claude/CLAUDE.md"* ]]
+  [ ! -e "$BATS_TEST_TMPDIR/.claude/CLAUDE.md.bak" ]
+}
+
+@test "--dry-run does not create a missing parent directory" {
+  run install_into "$BATS_TEST_TMPDIR" --dry-run
+  [ "$status" -eq 0 ]
+  [ ! -e "$BATS_TEST_TMPDIR/.claude" ]
+  [[ "$output" == *"$BATS_TEST_TMPDIR/.claude/CLAUDE.md"* ]]
 }
 
 @test "running twice is idempotent: no backups, no changed links, exit 0" {
@@ -69,6 +103,15 @@ install_into() {
   [ "$status" -eq 0 ]
   [ "$BATS_TEST_TMPDIR/.vimrc" -ef "$REPO_ROOT/.vimrc" ]
   [ -z "$(ls -A "$BATS_TEST_TMPDIR/elsewhere")" ]
+}
+
+@test "--list prints the manifest and makes no changes" {
+  run install_into "$BATS_TEST_TMPDIR" --list
+  [ "$status" -eq 0 ]
+  [ -n "$output" ]
+
+  run find "$BATS_TEST_TMPDIR" -mindepth 1
+  [ -z "$output" ]
 }
 
 @test "--dry-run makes no changes and exits 0" {

@@ -4,7 +4,7 @@
     # Find commits by source code
 
     cc = "!f() { \
-      git log --pretty=custom --decorate --date=short -S\"$1\"; \
+        git log --pretty=custom --decorate --date=short -S\"$1\"; \
     }; f"
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -12,7 +12,7 @@
     # Find commits by commit message
 
     cm = "!f() { \
-      git log --pretty=custom --decorate --date=short --grep=\"$1\"; \
+        git log --pretty=custom --decorate --date=short --grep=\"$1\"; \
     }; f"
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -20,8 +20,8 @@
     # List remote branches
 
     lrb = "!f() { \
-      remote=\"${1:-origin}\"; \
-      git ls-remote --heads \"$remote\"; \
+        remote=\"${1:-origin}\"; \
+        git ls-remote --heads \"$remote\"; \
     }; f"
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -30,17 +30,17 @@
     # if a branch name is specified, on top of the specified branch
 
     mpr = "!f() { \
-      currentBranch=\"$(git symbolic-ref --short HEAD)\"; \
-      branch=\"${2:-$currentBranch}\"; \
-      if printf \"%s\" \"$1\" | grep -q '^[0-9]\\+$'; then \
-          git fetch origin \"refs/pull/$1/head:pr/$1\" && \
-          git checkout -B \"$branch\" && \
-          git rebase \"$branch\" \"pr/$1\" && \
-          git checkout -B \"$branch\" && \
-          git merge \"pr/$1\" && \
-          git branch -D \"pr/$1\" && \
-          git commit --amend -m \"$(git log -1 --pretty=%B)\n\nClose #$1\"; \
-      fi \
+        currentBranch=\"$(git symbolic-ref --short HEAD)\"; \
+        branch=\"${2:-$currentBranch}\"; \
+        if printf \"%s\" \"$1\" | grep -q '^[0-9]\\+$'; then \
+            git fetch origin \"refs/pull/$1/head:pr/$1\" && \
+            git checkout -B \"$branch\" && \
+            git rebase \"$branch\" \"pr/$1\" && \
+            git checkout -B \"$branch\" && \
+            git merge \"pr/$1\" && \
+            git branch -D \"pr/$1\" && \
+            git commit --amend -m \"$(git log -1 --pretty=%B)\n\nClose #$1\"; \
+        fi \
     }; f"
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -48,8 +48,8 @@
     # Fetch origin and checkout
 
     get = "!f() { \
-      git fetch origin \"$1\"; \
-      git checkout \"$1\"; \
+        git fetch origin \"$1\"; \
+        git checkout \"$1\"; \
     }; f"
 
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

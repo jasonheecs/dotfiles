@@ -23,7 +23,7 @@ jobs:
 
       - name: Install on a fresh machine and start a shell
         run: |
-          tests/install.sh
+          ./install.sh
           zsh -i -c 'true'
 
   shellcheck:

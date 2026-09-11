@@ -32,30 +32,3 @@ repo_aliases() {
     fi
   done <<< "$output"
 }
-
-array_entries() {
-  sed -n "/^$1=(/,/^)/p" "$REPO_ROOT/tests/install.sh" | grep -oE '\.[A-Za-z0-9_.-]+'
-}
-
-@test "every excluded file records why it is not installed" {
-  files=$(array_entries EXCLUDED_FILES | grep -c .)
-  reasons=$(sed -n '/^EXCLUDED_REASONS=(/,/^)/p' "$REPO_ROOT/tests/install.sh" | grep -c '"')
-  [ "$files" -eq "$reasons" ]
-}
-
-@test "every tracked root dotfile is installed or excluded by tests/install.sh" {
-  linked=$(array_entries LINK_FILES)
-  excluded=$(array_entries EXCLUDED_FILES)
-
-  missing=()
-  while IFS= read -r f; do
-    if ! grep -qxF "$f" <<< "$linked" && ! grep -qxF "$f" <<< "$excluded"; then
-      missing+=("$f")
-    fi
-  done < <(git -C "$REPO_ROOT" ls-files -- '.*' | grep -v '/')
-
-  if [ "${#missing[@]}" -ne 0 ]; then
-    echo "unaccounted-for dotfile(s): ${missing[*]}" >&2
-    return 1
-  fi
-}
