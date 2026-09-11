@@ -22,8 +22,10 @@ CI jobs line up.
 ## What Changes
 
 - Add a `Makefile` with one entry per check, plus one entry that runs all of them.
-- Have each CI job call its matching entry instead of spelling out the commands. That way each
-  command is written down in exactly one place.
+- Have each CI job that spells out its commands call its matching entry instead, so those commands
+  are written down in exactly one place. Two of the four jobs run pinned marketplace actions with
+  no separable command; their entries are for local use and match the action rather than being
+  called by it.
 - Add an entry that lists what you can run, so you can find out without opening the file.
 - Replace the growing list of commands in the README with the single one.
 
@@ -44,7 +46,7 @@ None.
 ## Impact
 
 - `Makefile` — new file at the top of the repository.
-- `.github/workflows/ci.yml` — each job's commands get replaced by a call to the matching entry.
+- `.github/workflows/ci.yml` — the two jobs with inline commands call the matching entry instead.
 - `README.md` — the Testing section swaps its command list for the single command.
 - **Ordering**: this should land after the changes that create the checks it wraps. A list built
   before those exist would be wrong on arrival.

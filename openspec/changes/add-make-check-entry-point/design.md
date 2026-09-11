@@ -43,13 +43,17 @@ flowchart TD
     end
 
     j1 -->|make test| t1
-    j2 -->|make lint-shell| t2
     j3 -->|make lint-format| t3
-    j4 -->|make lint-workflow| t4
+    j2 -.->|marketplace action,<br/>own definition| t2
+    j4 -.->|marketplace action,<br/>own definition| t4
 ```
 
-Each check is defined once, in a target. The person calls the aggregate; each CI job calls its
-one target. Neither side holds a copy of the commands, so they cannot drift.
+Solid edges are calls: the job runs the target, so the check is defined once and neither side
+holds a copy. Dashed edges are not calls — the `shellcheck` and `actionlint` jobs run pinned
+marketplace actions that install and check in one step, so each holds its own definition and the
+target only mirrors it. Two of the four checks are shared by construction; for the other two,
+`lint-shell` and `lint-workflow` are local-only entry points whose agreement rests on matching
+how the action selects its inputs.
 
 ## Goals / Non-Goals
 
@@ -97,6 +101,26 @@ exactly the drift the change exists to prevent, and nothing would detect it.
 *Consequence:* the jobs get slightly less readable, since the commands move out of the workflow
 into the `Makefile`. Worth it, and `make -n` shows what a target would run.
 
+*Scope:* this holds for the two jobs with a separable command — `test` and `editorconfig`. See
+the next decision for the other two.
+
+### Two jobs keep their marketplace actions
+
+`shellcheck` and `actionlint` run through actions that install a pinned version and check in one
+atomic step; neither offers an install-only mode, so pointing them at a target means replacing
+the action outright and giving up its pinning. They are left as they are, which makes `lint-shell`
+and `lint-workflow` local-only entry points.
+
+*Consequence:* for those two, a clean local run rests on the target matching the action rather
+than on invoking it, and nothing detects a divergence. `lint-shell` narrows that exposure by
+discovering its inputs — `git ls-files` over the same patterns the action finds — so neither side
+carries a hand-written file list that can fall out of date. An enumerated list had already
+drifted: it omitted `tests/lint-gitaliases.sh`, which the action checks by pattern.
+
+*Alternative considered:* replace both actions with an install step plus `make`. Rejected for
+now — it gives up pinned versions and the actions' caching for a gain that only matters once the
+definitions actually diverge.
+
 ### The aggregate target is honest about what it covers
 
 On a machine without the macOS tooling the behavioural suite cannot run. The aggregate reports
@@ -116,12 +140,15 @@ separate step, named in the README next to the aggregate, so the person runs it 
 **The target list falls behind the checks** → The failure is quiet: the aggregate passes while CI
 fails, which is precisely the problem this change set out to fix, reintroduced one level up. The
 structural mitigation is that CI jobs call the targets, so a check with no target has nothing to
-invoke and is noticed immediately.
+invoke and is noticed immediately. That mitigation covers `test` and `editorconfig` only. For
+`shellcheck` and `actionlint` the target can still fall behind the action, which is why
+`lint-shell` derives its file set rather than listing it.
 
 **Local and CI results can still differ** → Tool versions differ between a Homebrew install and a
-pinned CI version, and the linters run on Linux in CI and macOS locally. Shared commands remove
-one source of difference, not all of them. The README should say the aggregate is a strong signal
-rather than a guarantee.
+pinned CI version, and the linters run on Linux in CI and macOS locally. Two checks' CI
+definitions also live in the workflow rather than the `Makefile`. Shared commands remove one
+source of difference, not all of them. The README should say the aggregate is a strong signal
+rather than a guarantee, and name which checks are only matched.
 
 **`make`'s tab sensitivity** → A recipe indented with spaces fails confusingly. The
 `.editorconfig` from the formatting change needs a `Makefile` section preserving tabs, or the
