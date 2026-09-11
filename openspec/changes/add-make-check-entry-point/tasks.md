@@ -26,8 +26,14 @@
       so there's no inline command to point at a target without replacing the action outright.
       Per the user's explicit decision this session, those two jobs are left unchanged; `lint-shell`
       and `lint-workflow` exist for local use only. See tasks 2.3/2.4 for the resulting scope.
-- [ ] 2.3 Verify the definitions are genuinely shared: change a flag in one target, confirm the
+- [x] 2.3 Verify the definitions are genuinely shared: change a flag in one target, confirm the
       corresponding CI job picks it up without the workflow being edited, then revert.
+
+      Added `-verbose` to `lint-format`, pushed with `ci.yml` untouched: run 34565290227's
+      `editorconfig` job log shows `editorconfig-checker -verbose` and the verbose "Adding ... to
+      be checked" lines, proving CI picked up the flag with zero workflow changes. Reverted here.
+      Demonstrated against `lint-format`/`editorconfig`, not shellcheck/actionlint — see 2.2's
+      scope note.
 - [ ] 2.4 Verify a check cannot exist without a target: confirm every job's step invokes a
       target, so a check added to CI with no target has nothing to call.
 
