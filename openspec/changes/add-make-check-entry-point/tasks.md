@@ -44,8 +44,20 @@
       a target would still have nothing to call structurally, but an *existing* check's drift from
       its `lint-shell`/`lint-workflow` target's definition would go undetected, since CI doesn't
       run through those targets at all. This narrows the spec's "every job's step invokes a
-      target" scenario to 2 of 4 checks; worth an `/opsx:update` pass on design.md/tasks.md to
-      record it formally.
+      target" scenario to 2 of 4 checks. Now recorded formally: design.md's diagram marks the two
+      unrouted jobs with dashed edges and carries a "Two jobs keep their marketplace actions"
+      decision, and the delta spec's requirement distinguishes invoked from matched definitions.
+      See task 2.5 for the gap this left in `lint-shell`.
+
+- [x] 2.5 Close the gap the exemption leaves in `lint-shell`: discover the scripts to analyse
+      instead of listing them, matching how CI's action selects files. Verify a newly added script
+      is analysed with nothing registering it, and that the target still passes.
+
+      The enumerated list omitted `tests/lint-gitaliases.sh`, which CI's action checks by pattern,
+      so a ShellCheck finding there would have passed `make check` and failed CI. Now
+      `shellcheck $(git ls-files '*.sh' '*.bash' '*.bats' '.osx')`, which resolves to exactly the
+      set the action finds. Verified: an unregistered probe script's SC2086 failed the target
+      (`make: *** [lint-shell] Error 1`), and the target passes clean once removed.
 
 ## 3. Handle the formatting interaction
 
