@@ -4,7 +4,12 @@
 help: ## List available targets
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  %-14s %s\n", $$1, $$2}'
 
-check: lint-shell lint-format lint-workflow test ## Run every check
+check: lint-shell lint-format lint-workflow ## Run every check (behavioural suite skipped without macOS tooling)
+	@if command -v bats >/dev/null 2>&1; then \
+		$(MAKE) test; \
+	else \
+		echo "skip: behavioural suite needs bats (macOS + Homebrew tooling) - run 'brew bundle --file=tests/Brewfile'"; \
+	fi
 
 test: ## Run the bats behavioural suite
 	bats tests/

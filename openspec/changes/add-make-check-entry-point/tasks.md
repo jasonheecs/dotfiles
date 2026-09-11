@@ -6,7 +6,7 @@
 - [x] 1.2 Add a `help` target listing the available targets with a one-line description each, and
       make it the default target so a bare `make` explains itself. Verify `make` and `make help`
       both print the list.
-- [ ] 1.3 Make the aggregate report the behavioural suite as skipped, with a reason, when the
+- [x] 1.3 Make the aggregate report the behavioural suite as skipped, with a reason, when the
       macOS tooling it needs is absent, rather than failing. Verify by running the aggregate with
       that tooling unavailable and confirming it reports a skip and continues.
 - [ ] 1.4 Confirm no target installs software. Verify by reading the recipes and checking that
