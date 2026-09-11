@@ -12,7 +12,7 @@
 
 ## 2. Remove the accounting check
 
-- [ ] 2.1 Delete both bootstrap checks from `tests/invariants.bats` — the one asserting every
+- [x] 2.1 Delete both bootstrap checks from `tests/invariants.bats` — the one asserting every
       excluded file records a reason, and the one asserting every tracked root dotfile is
       installed or excluded — along with the array-extraction helper they share. Verify the file
       still parses, that only the alias check remains, and that its header comment already
