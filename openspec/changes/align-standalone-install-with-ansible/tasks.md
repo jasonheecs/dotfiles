@@ -68,7 +68,7 @@
 
 ## 7. Delete the checker configuration
 
-- [ ] 7.1 Delete `.editorconfig-checker.json` and pass the equivalent flag wherever the checker
+- [x] 7.1 Delete `.editorconfig-checker.json` and pass the equivalent flag wherever the checker
       runs — the CI formatting job and the README — each with a one-line note saying why the
       check is suppressed. Verify the checker reports the repository clean with the flag, and
       that without it the aligned continuation lines in `.gitaliases` are flagged, proving the

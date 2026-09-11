@@ -72,10 +72,11 @@ shellcheck .osx install.sh tests/helpers/common.bash tests/*.bats
 
 **Formatting** — [editorconfig-checker](https://github.com/editorconfig-checker/editorconfig-checker)
 enforces the conventions declared in `.editorconfig` (final newline, no trailing whitespace,
-spaces not tabs) across every tracked file:
+spaces not tabs) across every tracked file. `indent_size` is declared but left advisory, because
+`.gitaliases` aligns its shell continuation lines under the four-space keys:
 
 ```sh
-editorconfig-checker
+editorconfig-checker -disable-indent-size
 ```
 
 **Workflow validation** — [`actionlint`](https://github.com/rhysd/actionlint) over every file in
