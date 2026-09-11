@@ -35,7 +35,7 @@
       ordered to match `dotfiles_files` so the two compare line by line. Verify against a
       sandbox home that each newly added entry is created as a link resolving to the repository
       file.
-- [ ] 4.3 Compare the installer's list against the playbook's by hand and note the result.
+- [x] 4.3 Compare the installer's list against the playbook's by hand and note the result.
       Verify the only differences are the playbook's duplicate `.claude/CLAUDE.md` entry, which
       is harmless and out of scope, and `.editorconfig`, which the playbook gains by a manual
       edit outside this repository.
@@ -52,7 +52,7 @@
 - [x] 5.3 Verify dry-run mode covers nested entries: run with `--dry-run` against a sandbox home
       with no `.claude` directory and confirm the directory is not created, the sandbox is left
       empty, and the plan names the link it would make.
-- [ ] 5.4 Add a `--list` flag that prints each managed path on its own line and exits without
+- [x] 5.4 Add a `--list` flag that prints each managed path on its own line and exits without
       touching the filesystem. Verify it leaves a sandbox home empty and that the entry
       containing a slash is printed whole rather than split.
 

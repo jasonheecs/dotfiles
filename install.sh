@@ -26,8 +26,13 @@ DRY_RUN=0
 for arg in "$@"; do
   case "$arg" in
     --dry-run) DRY_RUN=1 ;;
+    # So the tests can ask what's managed instead of parsing this file.
+    --list)
+      printf '%s\n' "${LINK_FILES[@]}"
+      exit 0
+      ;;
     *)
-      echo "usage: $0 [--dry-run]" >&2
+      echo "usage: $0 [--dry-run | --list]" >&2
       exit 1
       ;;
   esac
