@@ -33,9 +33,13 @@
 
 ## 3. Handle the formatting interaction
 
-- [ ] 3.1 Add a `Makefile` section to `.editorconfig` preserving tab indentation, since `make`
+- [x] 3.1 Add a `Makefile` section to `.editorconfig` preserving tab indentation, since `make`
       requires tabs in recipes and the repository-wide setting is spaces. Verify the formatting
       check passes against the `Makefile` and that `make check` still runs.
+
+      Already satisfied: the `[{Makefile,makefile,GNUmakefile,*.mk}]` section with
+      `indent_style = tab` was added in `4ecd628`, before this change. No new edit needed;
+      verified `editorconfig-checker Makefile` passes clean and `make check` runs.
 
 ## 4. Document the single command
 
