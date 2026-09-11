@@ -58,11 +58,11 @@
 
 ## 6. Rework the bootstrap suite around the list
 
-- [ ] 6.1 Change `tests/bootstrap.bats` to take its expected files from the installer's `--list`
+- [x] 6.1 Change `tests/bootstrap.bats` to take its expected files from the installer's `--list`
       output rather than a hand-written copy, and drop the count from the test name. Verify the
       test asserts the list is non-empty before looping, so it cannot pass vacuously, and that
       adding or removing a manifest entry requires no edit to the test.
-- [ ] 6.2 Add coverage for the nested entry: it resolves to the repository file, its parent in
+- [x] 6.2 Add coverage for the nested entry: it resolves to the repository file, its parent in
       the sandbox home is a real directory rather than a link into the repository, and a second
       run leaves it unchanged with no backup. Verify with `bats tests/bootstrap.bats`.
 
