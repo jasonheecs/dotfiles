@@ -4,8 +4,8 @@ There are two ways to get these dotfiles onto a machine, and they do not agree a
 "installed" means.
 
 The normal way is the [mac-dev-setup](https://github.com/jasonheecs/mac-dev-setup) Ansible
-playbook. It clones this repository and creates ten symlinks in your home directory. The other
-way is `tests/install.sh` in this repository. It creates seven.
+playbook. It clones this repository and links ten distinct files into your home directory. The
+other way is `tests/install.sh` in this repository. It links seven.
 
 The three it skips are not an accident in one direction. Two of them are *deliberately* skipped,
 with written reasons — and Ansible links them anyway.
@@ -32,30 +32,47 @@ Ansible linked the file back in March.
 "you added a dotfile and forgot to install it" only looks at the top level, so the file is
 invisible to the installer *and* to its own safety net.
 
+**Two more files at the top look like dotfiles but are not.** `.editorconfig` and
+`.editorconfig-checker.json` arrived later, to configure this repository's own formatting check.
+In a dotfiles repository, a dot-file at the top reads as "this belongs in your home directory",
+and neither of these did.
+
 On top of all that, the installer lives in `tests/`. That is where you look for tests, not for
 the thing a new machine runs first.
-
-The Ansible repository is off-limits for edits, so this repository does all the moving.
 
 See the [install paths diagram](design.md#the-two-install-paths) for how the two routes converge.
 
 ## What Changes
 
 - Move the installer from `tests/install.sh` to `install.sh` at the top of the repository, and
-  update the three places that point at the old path.
-- Grow the installer's list from seven files to ten, so it matches Ansible: add `.gitignore`,
-  `.osx`, and `.claude/CLAUDE.md`.
+  update the places that point at the old path.
+- Grow the installer's list from seven files to eleven: add `.gitignore`, `.osx`,
+  `.claude/CLAUDE.md`, and `.editorconfig`.
 - Correct the record on `.gitignore`. It is the global ignore file that `.gitconfig` points at,
   and it belongs in your home directory.
 - Link `.osx`, but still never run it. Those are two different things. The existing rule is about
   *running* it, and that rule does not change at all.
 - Teach the installer to make links inside subfolders, creating the folder if it is missing.
-- Widen the "did you forget to install this?" check so it looks at every tracked dotfile, not
-  just the ones at the top level. That is what let `.claude/CLAUDE.md` slip through.
-- Shrink the skip list to exactly one file, `.github/workflows/ci.yml`, which configures this
-  repository's own CI and has no business in your home directory.
-- Write a note next to the file list saying it mirrors `dotfiles_files` in the Ansible
-  repository, so the next reader knows the list is not a free choice and knows where to compare.
+- Give the installer a way to print the files it manages, so the tests can ask it instead of
+  reading its source code with `sed` — which, as written, cannot even read a path with a slash in
+  it.
+- **Delete `.editorconfig-checker.json`.** Its single setting suppressed the indent-size check
+  because `.gitaliases` indented its continuation lines off the four-space grid. Reindenting that
+  file onto the grid retires both the suppression and the config file. One less dot-file at the
+  top that was never yours, and one more check actually running.
+- **Link `.editorconfig` instead of hiding it.** It cannot move — the EditorConfig standard fixes
+  both its name and the fact that tools look for it by walking up from the file being edited — so
+  the honest answer is to make it serve double duty, exactly like `.gitignore` already does. It
+  keeps configuring this repository *and* becomes your default for projects that do not bring
+  their own. Before that, it gains tab rules for Makefiles and Go, so being a global default
+  cannot break the formats that require tabs.
+- **Drop the "did you forget to install this?" check.** It made you maintain a second list every
+  time you added or removed a dotfile, and that list existed for no other reason. Adding a dotfile
+  to a dotfiles repository should be cheap. The written reasons stay, as a comment next to the
+  list.
+
+After this, twelve dotfiles are tracked: eleven are linked, and one — `.github/workflows/ci.yml`
+— is deliberately not.
 
 ## Capabilities
 
@@ -65,25 +82,36 @@ None.
 
 ### Modified Capabilities
 
-- `dotfiles-bootstrap`: two rules change and one is added.
+- `dotfiles-bootstrap`: one rule changes, one is added, one is removed.
   - *Managed dotfiles are linked into the home directory* (modified) — one part currently says
     the macOS defaults script and `.gitignore` are deliberately not linked. Both get linked now,
     so that part gets rewritten around the one file that really is skipped. It also gains a case
-    for making a link inside a folder that does not exist yet.
-  - *Every tracked dotfile is accounted for by the bootstrap* (modified) — widens from "tracked
-    at the top level" to "tracked anywhere", closing the gap that let `.claude/CLAUDE.md` go
-    unnoticed.
-  - *Standalone installation matches the provisioned result* (added) — there is no rule today
-    saying the two install routes should agree, which is why they drifted apart.
+    for making a link inside a folder that does not exist yet, and two cases for the formatting
+    declaration now doing double duty.
+  - *The managed file list is readable without parsing the bootstrap* (added) — the tests
+    currently read the installer's source text to find out what it installs, which breaks on any
+    path containing a slash.
+  - *Every tracked dotfile is accounted for by the bootstrap* (removed) — see the reason and
+    migration note in the spec delta.
 
 ## Impact
 
-- `tests/install.sh` → `install.sh` — moved, list extended, subfolder linking added.
-- `tests/invariants.bats` — points at the old path in two places, and its check widens to
-  subfolders.
-- `tests/bootstrap.bats` — runs the installer, so it follows the move and covers the new files.
-- `.github/workflows/ci.yml` — its fresh-machine step calls the old path.
+- `tests/install.sh` → `install.sh` — moved, list extended, subfolder linking added, exclusion
+  arrays replaced by a comment, and a way to print the list added.
+- `tests/invariants.bats` — points at the old path, and loses both of its bootstrap checks.
+- `tests/bootstrap.bats` — runs the installer, so it follows the move, and asks the installer for
+  its file list rather than repeating it.
+- `tests/helpers/common.bash` — unchanged, but named here because the shellcheck file list moves
+  with the installer.
+- `.editorconfig` — gains tab rules for Makefiles and Go, and is now linked into your home
+  directory.
+- `.editorconfig-checker.json` — deleted.
+- `.github/workflows/ci.yml` — its fresh-machine step calls the old path, and its formatting step
+  needs the flag that replaces the deleted config file.
 - `README.md` — the Setup section points at `tests/install.sh` and lists seven manual commands.
-- Three more files get linked into your home directory on a standalone install. On a machine
-  Ansible already set up, all three are already links to the same targets, so the installer says
-  "unchanged" and does nothing.
+- **Outside this repository**: `dotfiles_files` in `mac-dev-setup/default.config.yml` needs
+  `.editorconfig` added by hand, or the two routes differ by that one file. Nothing here can
+  detect that, and nothing here changes it.
+- Four more files get linked into your home directory on a standalone install. On a machine
+  Ansible already set up, three of them are already links to the same targets, so the installer
+  says "unchanged" and does nothing. Only `~/.editorconfig` is genuinely new.

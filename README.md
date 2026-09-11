@@ -11,20 +11,32 @@ Personal dotfiles for zsh, git, vim, and macOS.
 | `.aliases` | A few shell aliases (`Ga`) |
 | `.gitconfig` | Global git config — vim as editor, colored output, `osxkeychain` credential helper, includes `.gitaliases` |
 | `.gitaliases` | Custom git aliases/functions (`cc`, `cm`, `lrb`, `mpr`, `get`, `pretty`) |
+| `.gitignore` | Git's **global** excludes file — `.gitconfig` points `core.excludesfile` at it, so it applies to every repo you work in |
 | `.vimrc` | Vim settings |
 | `.tmux.conf` | tmux config |
 | `.osx` | macOS `defaults write` tweaks for screenshots, Dock, and Mission Control |
+| `.editorconfig` | Formatting conventions — governs this repo, and once linked becomes the default for projects that declare none |
 | `.claude/CLAUDE.md` | User-level Claude Code preferences |
 
 ## Setup
 
-Clone the repo, then run the installer — it links all seven managed dotfiles into `$HOME`,
-backing up anything already there as `<name>.bak`. Pass `--dry-run` to preview:
+These dotfiles are normally installed for you by the
+[mac-dev-setup](https://github.com/jasonheecs/mac-dev-setup) Ansible playbook, which clones this
+repo and links them as part of provisioning a machine. `install.sh` is the standalone route, for
+a machine you are not provisioning that way. Both produce the same links; only the playbook also
+installs software.
+
+Clone the repo, then run the installer — it links every managed dotfile into `$HOME`, backing up
+anything already there as `<name>.bak`. Pass `--dry-run` to preview, or `--list` to see what it
+manages:
 
 ```sh
 git clone <repo-url> ~/Projects/dotfiles
-~/Projects/dotfiles/tests/install.sh
+~/Projects/dotfiles/install.sh
 ```
+
+The list mirrors `dotfiles_files` in the playbook's `default.config.yml`, kept in step by hand —
+nothing detects drift between the two.
 
 Apply the macOS defaults (optional, restarts affected apps unless `--no-restart` is passed):
 
@@ -63,16 +75,16 @@ bats tests/
 ```
 
 **Static analysis** — [ShellCheck](https://www.shellcheck.net) over every bash-family script in
-the repository (`.osx`, `tests/install.sh`, `tests/helpers/common.bash`, and the `.bats` files
+the repository (`.osx`, `install.sh`, `tests/helpers/common.bash`, and the `.bats` files
 themselves):
 
 ```sh
-shellcheck .osx tests/install.sh tests/helpers/common.bash tests/*.bats
+shellcheck .osx install.sh tests/helpers/common.bash tests/*.bats
 ```
 
 **Formatting** — [editorconfig-checker](https://github.com/editorconfig-checker/editorconfig-checker)
 enforces the conventions declared in `.editorconfig` (final newline, no trailing whitespace,
-spaces not tabs) across every tracked file:
+spaces not tabs, indent size) across every tracked file:
 
 ```sh
 editorconfig-checker

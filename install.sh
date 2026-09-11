@@ -3,39 +3,36 @@
 # --dry-run to preview without touching the filesystem.
 set -euo pipefail
 
-REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+# .github/workflows/ci.yml is the one tracked dotfile deliberately left out:
+# it configures this repository's CI and means nothing in $HOME. .osx is
+# linked but never run -- linking a script and running it are different acts.
 LINK_FILES=(
-  .zshrc
-  .zimrc
   .aliases
-  .gitconfig
-  .gitaliases
-  .vimrc
-  .tmux.conf
-)
-
-# Parallel arrays, not an associative array: macOS ships bash 3.2, which
-# `declare -A` doesn't support.
-EXCLUDED_FILES=(
-  .osx
-  .gitignore
+  .claude/CLAUDE.md
   .editorconfig
-  .editorconfig-checker.json
-)
-EXCLUDED_REASONS=(
-  "executed on demand, never linked"
-  "applies to the repository itself"
-  "applies to the repository itself"
-  "applies to the repository itself"
+  .gitaliases
+  .gitconfig
+  .gitignore
+  .osx
+  .tmux.conf
+  .vimrc
+  .zimrc
+  .zshrc
 )
 
 DRY_RUN=0
 for arg in "$@"; do
   case "$arg" in
     --dry-run) DRY_RUN=1 ;;
+    # So the tests can ask what's managed instead of parsing this file.
+    --list)
+      printf '%s\n' "${LINK_FILES[@]}"
+      exit 0
+      ;;
     *)
-      echo "usage: $0 [--dry-run]" >&2
+      echo "usage: $0 [--dry-run | --list]" >&2
       exit 1
       ;;
   esac
@@ -55,6 +52,12 @@ install_link() {
   local name="$1"
   local target="$HOME/$name"
   local src="$REPO_ROOT/$name"
+
+  # Entries naming a subdirectory need it to exist first. Guarded on -d so a
+  # dry run stays quiet for the entries whose parent is plain $HOME.
+  local parent
+  parent="$(dirname "$target")"
+  [ -d "$parent" ] || run_or_echo mkdir -p "$parent"
 
   if [ -L "$target" ]; then
     if [ "$target" -ef "$src" ]; then
@@ -81,10 +84,6 @@ install_link() {
   echo "linking: $target"
   run_or_echo ln -s "$src" "$target"
 }
-
-for i in "${!EXCLUDED_FILES[@]}"; do
-  echo "excluded: ${EXCLUDED_FILES[$i]} (${EXCLUDED_REASONS[$i]})"
-done
 
 for name in "${LINK_FILES[@]}"; do
   install_link "$name"

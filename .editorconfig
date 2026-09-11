@@ -14,3 +14,12 @@ indent_size = 2
 # These use four-space indentation by convention.
 [{.gitconfig,.gitaliases,.vimrc}]
 indent_size = 4
+
+# This file is also linked to ~/.editorconfig, so it is the default for
+# projects that declare none. These two formats require literal tabs, and
+# the [*] indent_style above would otherwise break them.
+[{Makefile,makefile,GNUmakefile,*.mk}]
+indent_style = tab
+
+[*.go]
+indent_style = tab
