@@ -49,9 +49,7 @@ jobs:
         with:
           version: v4.0.1
 
-      # indent_size stays advisory: .gitaliases aligns its shell continuation
-      # lines under the four-space keys, which the check reads as a violation.
-      - run: editorconfig-checker -disable-indent-size
+      - run: editorconfig-checker
 
   actionlint:
     runs-on: ubuntu-latest

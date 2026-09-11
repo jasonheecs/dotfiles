@@ -56,9 +56,10 @@ See the [install paths diagram](design.md#the-two-install-paths) for how the two
 - Give the installer a way to print the files it manages, so the tests can ask it instead of
   reading its source code with `sed` — which, as written, cannot even read a path with a slash in
   it.
-- **Delete `.editorconfig-checker.json`.** Its single setting has an identical command-line flag,
-  so the file can go and the flag can be passed where the checker is run. One less dot-file at the
-  top that was never yours.
+- **Delete `.editorconfig-checker.json`.** Its single setting suppressed the indent-size check
+  because `.gitaliases` indented its continuation lines off the four-space grid. Reindenting that
+  file onto the grid retires both the suppression and the config file. One less dot-file at the
+  top that was never yours, and one more check actually running.
 - **Link `.editorconfig` instead of hiding it.** It cannot move — the EditorConfig standard fixes
   both its name and the fact that tools look for it by walking up from the file being edited — so
   the honest answer is to make it serve double duty, exactly like `.gitignore` already does. It

@@ -241,21 +241,23 @@ stays quiet for the ten entries whose parent is `$HOME`.
 Rejected — `~/.claude` holds live local state (settings, agents, sessions) that must not be
 replaced by a link into this repository. Only the single tracked file is managed.
 
-### `.editorconfig-checker.json` is deleted in favour of a flag
+### `.editorconfig-checker.json` is deleted, and the indent-size check is turned back on
 
-The file holds one setting, `Disable.IndentSize`. The binary has `-disable-indent-size`, and the
-two are the same setting: both write `Config.Disable.IndentSize` and merge through the same path,
-with exactly one consumer. A missing default config is explicitly tolerated in the tool's source —
-the `fs.ErrNotExist` from a default path is suppressed, and only a path passed via `-config` is
-allowed to fail.
+The file held one setting, `Disable.IndentSize`, which existed because `.gitaliases` aligned its
+shell continuation lines at six spaces under four-space keys — a violation the check was right to
+report.
 
-*Consequence:* there is no environment-variable form, so the flag has to be repeated at every
-invocation site — currently CI and the README. The pending `add-make-check-entry-point` change
-would reduce that to one place.
+Deleting the file was first paired with the binary's `-disable-indent-size` flag, the same setting
+by another name. Rejected on review: it preserved the suppression and spread it across every
+invocation site, since the flag has no environment-variable form.
 
-*Why the setting exists at all:* `.gitaliases` aligns shell continuation lines at six spaces under
-four-space keys. The indent-size check reads that as a violation. The declaration stays as
-documentation of intent; the check on it stays off.
+Instead `.gitaliases` is reindented to multiples of four — six spaces become eight, and `mpr`'s
+nested block ten becomes twelve. The declaration in `.editorconfig` is now enforced rather than
+merely documented, and the checker runs bare.
+
+*Consequence:* the indentation inside those alias strings is shell code inside a git config value,
+where leading whitespace on a continuation line is insignificant. Behaviour is unchanged, and
+`tests/gitaliases.bats` exercises all five aliases end to end to prove it.
 
 ## Risks / Trade-offs
 

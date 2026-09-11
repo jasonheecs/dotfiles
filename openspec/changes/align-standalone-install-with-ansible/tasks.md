@@ -68,11 +68,11 @@
 
 ## 7. Delete the checker configuration
 
-- [x] 7.1 Delete `.editorconfig-checker.json` and pass the equivalent flag wherever the checker
-      runs — the CI formatting job and the README — each with a one-line note saying why the
-      check is suppressed. Verify the checker reports the repository clean with the flag, and
-      that without it the aligned continuation lines in `.gitaliases` are flagged, proving the
-      flag is doing the same work the deleted file did.
+- [x] 7.1 Delete `.editorconfig-checker.json` and reindent `.gitaliases` to multiples of four so
+      the indent-size check passes unsuppressed, dropping the flag from the CI formatting job and
+      the README. Verify the checker reports the repository clean with no flag and no config
+      file, and that `tests/gitaliases.bats` and `tests/lint-gitaliases.sh` still pass, proving
+      the reindent did not change what the aliases do.
 
 ## 8. Document both paths
 
