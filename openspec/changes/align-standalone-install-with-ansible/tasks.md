@@ -27,13 +27,12 @@
 
 ## 4. Extend the manifest and retire the exclusion arrays
 
-- [ ] 4.1 Replace `EXCLUDED_FILES`, `EXCLUDED_REASONS`, and their print loop with a short comment
+- [x] 4.1 Replace `EXCLUDED_FILES`, `EXCLUDED_REASONS`, and their print loop with a short comment
       recording what is deliberately not linked and why, and remove the bash 3.2 note that only
       justified the parallel-array shape. Verify the installer still runs against a sandbox home
       and no longer prints exclusion lines.
-- [ ] 4.2 Add `.gitignore`, `.osx`, `.editorconfig`, and `.claude/CLAUDE.md` to the link list,
-      ordered to match `dotfiles_files` so the two compare line by line, and add a comment above
-      it naming `mac-dev-setup/default.config.yml` as the list it mirrors. Verify against a
+- [x] 4.2 Add `.gitignore`, `.osx`, `.editorconfig`, and `.claude/CLAUDE.md` to the link list,
+      ordered to match `dotfiles_files` so the two compare line by line. Verify against a
       sandbox home that each newly added entry is created as a link resolving to the repository
       file.
 - [ ] 4.3 Compare the installer's list against the playbook's by hand and note the result.
@@ -43,14 +42,14 @@
 
 ## 5. Support nested link targets and expose the list
 
-- [ ] 5.1 Teach the installer to create a link target's parent directory when it does not exist,
+- [x] 5.1 Teach the installer to create a link target's parent directory when it does not exist,
       applied per manifest entry so any entry containing a slash works, routed through the same
       helper the rest of the script uses so dry-run still changes nothing. Verify against a
       sandbox home with no `.claude` directory that the directory is created as a real directory
       and the link lands inside it.
-- [ ] 5.2 Verify the nested case is idempotent: run the installer twice against the same sandbox
+- [x] 5.2 Verify the nested case is idempotent: run the installer twice against the same sandbox
       home and confirm the second run reports the entry unchanged and creates no backup.
-- [ ] 5.3 Verify dry-run mode covers nested entries: run with `--dry-run` against a sandbox home
+- [x] 5.3 Verify dry-run mode covers nested entries: run with `--dry-run` against a sandbox home
       with no `.claude` directory and confirm the directory is not created, the sandbox is left
       empty, and the plan names the link it would make.
 - [ ] 5.4 Add a `--list` flag that prints each managed path on its own line and exits without

@@ -69,8 +69,6 @@ See the [install paths diagram](design.md#the-two-install-paths) for how the two
   time you added or removed a dotfile, and that list existed for no other reason. Adding a dotfile
   to a dotfiles repository should be cheap. The written reasons stay, as a comment next to the
   list.
-- Write a note next to the file list saying it mirrors `dotfiles_files` in the Ansible
-  repository, so the next reader knows the list is not a free choice and knows where to compare.
 
 After this, twelve dotfiles are tracked: eleven are linked, and one — `.github/workflows/ci.yml`
 — is deliberately not.

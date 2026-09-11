@@ -4,9 +4,7 @@
 
 This repository's dotfiles can be installed either by its own bootstrap or by the external
 provisioning playbook that clones it. Both paths SHALL produce the same set of links in the home
-directory. The bootstrap's manifest SHALL record that it mirrors the playbook's list and where
-that list lives, so a reader can compare the two without first discovering that a second
-installer exists.
+directory.
 
 #### Scenario: The same machine, either route
 
@@ -19,12 +17,6 @@ installer exists.
 - **WHEN** the bootstrap runs on a machine the provisioning playbook has already set up
 - **THEN** every link it manages is already correct
 - **AND** it reports them as unchanged and creates no backups
-
-#### Scenario: The manifest states what it mirrors
-
-- **WHEN** a reader opens the bootstrap's manifest
-- **THEN** it records that the list mirrors the external playbook's, and names where that list
-  lives, so the list is not mistaken for a free-standing choice
 
 #### Scenario: The two lists diverge
 

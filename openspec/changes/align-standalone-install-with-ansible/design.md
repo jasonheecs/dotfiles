@@ -63,7 +63,6 @@ nothing checks that they do — see Decisions.
 
 - A standalone clone plus one command yields the same links as a full Ansible provision.
 - The installer is discoverable as an installer.
-- A reader who finds the manifest can tell it mirrors something and find what.
 - Adding or removing a dotfile costs one edit, in one place.
 
 **Non-Goals:**
@@ -95,11 +94,17 @@ scripts with a shared entry-point discipline. There is one script.
 `.github/workflows/ci.yml`, and `tests/bootstrap.bats` all move. `REPO_ROOT` inside the script
 also loses its `/..`, which is easy to miss and breaks every link if missed.
 
-### The manifest mirrors `dotfiles_files` and says so, but nothing enforces it
+### The manifest mirrors `dotfiles_files`, and nothing enforces or annotates it
 
-The manifest gains a comment naming `mac-dev-setup/default.config.yml` as the list it mirrors, so
-the coupling is discoverable from the file that depends on it. Keeping them in step is a manual
-act.
+The manifest is ordered to match `dotfiles_files` so the two compare line by line, but carries no
+comment saying so. Keeping them in step is a manual act, and the coupling is documented here
+rather than in the script.
+
+*Alternative considered:* a comment above the manifest naming
+`mac-dev-setup/default.config.yml`, so the coupling is discoverable from the file that depends on
+it. Rejected on the author's call — the manifest is a list of filenames and reads as one, and a
+three-line preamble about a second repository is noise at the point of use for a fact that
+changes only when the playbook does.
 
 *Alternative considered:* a CI job that fetches the Ansible repository's `default.config.yml` and
 fails when the two lists disagree. It would catch drift the day it happens, and reading that repo
