@@ -1,16 +1,20 @@
-.PHONY: check test lint-shell lint-format lint-workflow
+.PHONY: help check test lint-shell lint-format lint-workflow
+.DEFAULT_GOAL := help
 
-check: lint-shell lint-format lint-workflow test
+help: ## List available targets
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  %-14s %s\n", $$1, $$2}'
 
-test:
+check: lint-shell lint-format lint-workflow test ## Run every check
+
+test: ## Run the bats behavioural suite
 	bats tests/
 
-lint-shell:
+lint-shell: ## Run ShellCheck over scripts and git alias bodies
 	shellcheck .osx install.sh tests/helpers/common.bash tests/*.bats
 	tests/lint-gitaliases.sh
 
-lint-format:
+lint-format: ## Check formatting against .editorconfig
 	editorconfig-checker
 
-lint-workflow:
+lint-workflow: ## Validate GitHub Actions workflows
 	actionlint

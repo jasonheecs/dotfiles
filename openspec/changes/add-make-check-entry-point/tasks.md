@@ -3,7 +3,7 @@
 - [x] 1.1 Add a `Makefile` at the repository root with one target per check and an aggregate
       `check` target depending on them. Verify each target runs its check on its own, and that
       `make check` runs all of them.
-- [ ] 1.2 Add a `help` target listing the available targets with a one-line description each, and
+- [x] 1.2 Add a `help` target listing the available targets with a one-line description each, and
       make it the default target so a bare `make` explains itself. Verify `make` and `make help`
       both print the list.
 - [ ] 1.3 Make the aggregate report the behavioural suite as skipped, with a reason, when the
