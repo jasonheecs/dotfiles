@@ -19,7 +19,7 @@ jobs:
         run: brew bundle --file=tests/Brewfile
 
       - name: Run test suite
-        run: bats tests/
+        run: make test
 
       - name: Install on a fresh machine and start a shell
         run: |

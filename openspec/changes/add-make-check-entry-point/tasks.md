@@ -14,7 +14,7 @@
 
 ## 2. Point the automation at the same definitions
 
-- [ ] 2.1 Replace the behavioural job's inline commands in `.github/workflows/ci.yml` with its
+- [x] 2.1 Replace the behavioural job's inline commands in `.github/workflows/ci.yml` with its
       target invocation. Verify by pushing and confirming the job passes and its log shows the
       same commands running.
 - [ ] 2.2 Replace each lint job's inline commands with its target invocation. Verify each job
