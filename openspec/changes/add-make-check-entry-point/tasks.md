@@ -34,8 +34,18 @@
       be checked" lines, proving CI picked up the flag with zero workflow changes. Reverted here.
       Demonstrated against `lint-format`/`editorconfig`, not shellcheck/actionlint — see 2.2's
       scope note.
-- [ ] 2.4 Verify a check cannot exist without a target: confirm every job's step invokes a
+- [x] 2.4 Verify a check cannot exist without a target: confirm every job's step invokes a
       target, so a check added to CI with no target has nothing to call.
+
+      Holds for `test` (`run: make test`) and `editorconfig` (`run: make lint-format`). Does
+      **not** hold for `shellcheck` (marketplace action, plus a `tests/lint-gitaliases.sh` step
+      left untouched alongside it) or `actionlint` (marketplace action) — both jobs were left
+      unchanged per the scope decision recorded in 2.2. For those two, a check added to CI without
+      a target would still have nothing to call structurally, but an *existing* check's drift from
+      its `lint-shell`/`lint-workflow` target's definition would go undetected, since CI doesn't
+      run through those targets at all. This narrows the spec's "every job's step invokes a
+      target" scenario to 2 of 4 checks; worth an `/opsx:update` pass on design.md/tasks.md to
+      record it formally.
 
 ## 3. Handle the formatting interaction
 
