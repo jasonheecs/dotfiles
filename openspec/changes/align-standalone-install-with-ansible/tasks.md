@@ -20,7 +20,7 @@
 
 ## 3. Make the formatting declaration safe as a global default
 
-- [ ] 3.1 Add tab-indentation sections to `.editorconfig` for Makefiles and Go, so serving as a
+- [x] 3.1 Add tab-indentation sections to `.editorconfig` for Makefiles and Go, so serving as a
       home-directory default cannot force spaces on formats that require tabs. Verify
       `editorconfig-checker` still reports the repository clean, and that a scratch Makefile
       indented with tabs outside any other declaration is accepted rather than flagged.
