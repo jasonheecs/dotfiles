@@ -1,6 +1,6 @@
 ## 1. Create the entry point
 
-- [ ] 1.1 Add a `Makefile` at the repository root with one target per check and an aggregate
+- [x] 1.1 Add a `Makefile` at the repository root with one target per check and an aggregate
       `check` target depending on them. Verify each target runs its check on its own, and that
       `make check` runs all of them.
 - [ ] 1.2 Add a `help` target listing the available targets with a one-line description each, and
