@@ -34,16 +34,16 @@ repo_aliases() {
 }
 
 array_entries() {
-  sed -n "/^$1=(/,/^)/p" "$REPO_ROOT/tests/install.sh" | grep -oE '\.[A-Za-z0-9_.-]+'
+  sed -n "/^$1=(/,/^)/p" "$REPO_ROOT/install.sh" | grep -oE '\.[A-Za-z0-9_.-]+'
 }
 
 @test "every excluded file records why it is not installed" {
   files=$(array_entries EXCLUDED_FILES | grep -c .)
-  reasons=$(sed -n '/^EXCLUDED_REASONS=(/,/^)/p' "$REPO_ROOT/tests/install.sh" | grep -c '"')
+  reasons=$(sed -n '/^EXCLUDED_REASONS=(/,/^)/p' "$REPO_ROOT/install.sh" | grep -c '"')
   [ "$files" -eq "$reasons" ]
 }
 
-@test "every tracked root dotfile is installed or excluded by tests/install.sh" {
+@test "every tracked root dotfile is installed or excluded by install.sh" {
   linked=$(array_entries LINK_FILES)
   excluded=$(array_entries EXCLUDED_FILES)
 

@@ -23,7 +23,7 @@ backing up anything already there as `<name>.bak`. Pass `--dry-run` to preview:
 
 ```sh
 git clone <repo-url> ~/Projects/dotfiles
-~/Projects/dotfiles/tests/install.sh
+~/Projects/dotfiles/install.sh
 ```
 
 Apply the macOS defaults (optional, restarts affected apps unless `--no-restart` is passed):
@@ -63,11 +63,11 @@ bats tests/
 ```
 
 **Static analysis** — [ShellCheck](https://www.shellcheck.net) over every bash-family script in
-the repository (`.osx`, `tests/install.sh`, `tests/helpers/common.bash`, and the `.bats` files
+the repository (`.osx`, `install.sh`, `tests/helpers/common.bash`, and the `.bats` files
 themselves):
 
 ```sh
-shellcheck .osx tests/install.sh tests/helpers/common.bash tests/*.bats
+shellcheck .osx install.sh tests/helpers/common.bash tests/*.bats
 ```
 
 **Formatting** — [editorconfig-checker](https://github.com/editorconfig-checker/editorconfig-checker)

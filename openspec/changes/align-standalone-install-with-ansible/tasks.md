@@ -1,13 +1,13 @@
 ## 1. Relocate the installer
 
-- [ ] 1.1 Move `tests/install.sh` to `install.sh` at the repository root, preserving its
+- [x] 1.1 Move `tests/install.sh` to `install.sh` at the repository root, preserving its
       executable bit, and drop the `/..` from its `REPO_ROOT` so it still resolves to the
       repository. Verify the file is executable and that `--dry-run` against a sandbox home
       names link targets inside that sandbox, not one directory above the repository.
-- [ ] 1.2 Update every reference to the old path: `tests/invariants.bats`,
+- [x] 1.2 Update every reference to the old path: `tests/invariants.bats`,
       `tests/bootstrap.bats`, `.github/workflows/ci.yml`, and `README.md`. Verify by searching
       the tree for the old path and finding no hits outside `openspec/changes/archive/`.
-- [ ] 1.3 Verify the suite still passes against the moved installer with `bats tests/`, and that
+- [x] 1.3 Verify the suite still passes against the moved installer with `bats tests/`, and that
       `shellcheck` over the repository's bash-family files is clean at the new path.
 
 ## 2. Remove the accounting check

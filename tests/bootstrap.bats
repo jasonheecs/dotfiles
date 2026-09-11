@@ -1,10 +1,10 @@
 #!/usr/bin/env bats
-# Drives tests/install.sh against a throwaway HOME, covering the four-state
+# Drives install.sh against a throwaway HOME, covering the four-state
 # logic, idempotency, --dry-run, and invocation from an unrelated cwd.
 
 load helpers/common
 
-INSTALL_SH="$REPO_ROOT/tests/install.sh"
+INSTALL_SH="$REPO_ROOT/install.sh"
 
 install_into() {
   HOME="$1" "$INSTALL_SH" "${@:2}"

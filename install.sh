@@ -3,7 +3,7 @@
 # --dry-run to preview without touching the filesystem.
 set -euo pipefail
 
-REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 LINK_FILES=(
   .zshrc
