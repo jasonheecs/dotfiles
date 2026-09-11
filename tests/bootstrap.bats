@@ -15,8 +15,9 @@ install_into() {
   [ "$status" -eq 0 ]
 
   # Asked of the installer rather than repeated here, so adding a dotfile
-  # needs no edit to this file.
-  managed=$("$INSTALL_SH" --list)
+  # needs no edit to this file. Sandboxed like every other invocation, so a
+  # --list that stopped exiting early couldn't reach the real $HOME.
+  managed=$(install_into "$BATS_TEST_TMPDIR" --list)
   # Guards against the loop passing vacuously on an empty list.
   [ -n "$managed" ]
 
@@ -102,6 +103,15 @@ install_into() {
   [ "$status" -eq 0 ]
   [ "$BATS_TEST_TMPDIR/.vimrc" -ef "$REPO_ROOT/.vimrc" ]
   [ -z "$(ls -A "$BATS_TEST_TMPDIR/elsewhere")" ]
+}
+
+@test "--list prints the manifest and makes no changes" {
+  run install_into "$BATS_TEST_TMPDIR" --list
+  [ "$status" -eq 0 ]
+  [ -n "$output" ]
+
+  run find "$BATS_TEST_TMPDIR" -mindepth 1
+  [ -z "$output" ]
 }
 
 @test "--dry-run makes no changes and exits 0" {
